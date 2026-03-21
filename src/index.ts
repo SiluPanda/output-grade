@@ -46,3 +46,7 @@ export type { PatternEntry } from './patterns/hedging';
 export { REFUSAL_PATTERNS } from './patterns/refusal';
 export { CONFIDENCE_PATTERNS } from './patterns/confidence';
 export { STOPWORDS, removeStopwords } from './patterns/stopwords';
+
+// ── Grading Dimensions ──────────────────────────────────────────────────────
+
+export { scoreStructuralValidity } from './dimensions/structural-validity';

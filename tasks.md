@@ -48,17 +48,17 @@
 
 ### 4a: Structural Validity
 
-- [ ] **Implement JSON validity scoring** — In `src/dimensions/structural-validity.ts`, implement JSON validity checks: `JSON.parse()` success (1.0), lenient parse success (0.8), trailing comma (0.7), unquoted keys (0.6), single quotes (0.6), completely unparseable (0.0). Detect structural anomalies in valid JSON: deeply nested (depth > 20), extremely long strings (> 100KB), duplicate keys. Emit appropriate signals with locations. | Status: not_done
+- [x] **Implement JSON validity scoring** — In `src/dimensions/structural-validity.ts`, implement JSON validity checks: `JSON.parse()` success (1.0), lenient parse success (0.8), trailing comma (0.7), unquoted keys (0.6), single quotes (0.6), completely unparseable (0.0). Detect structural anomalies in valid JSON: deeply nested (depth > 20), extremely long strings (> 100KB), duplicate keys. Emit appropriate signals with locations. | Status: done
 
-- [ ] **Implement Markdown validity scoring** — In `structural-validity.ts`, add markdown checks: code fence balance (unclosed fence deducts 0.3, critical signal), heading hierarchy (skipped levels deduct 0.05 each, info signal), list consistency (mixed markers info signal, inconsistent indentation warning), link syntax validation (malformed `[text](url)` pairs warning signal). Base score 1.0 minus deductions, floored at 0.0. | Status: not_done
+- [x] **Implement Markdown validity scoring** — In `structural-validity.ts`, add markdown checks: code fence balance (unclosed fence deducts 0.3, critical signal), heading hierarchy (skipped levels deduct 0.05 each, info signal), list consistency (mixed markers info signal, inconsistent indentation warning), link syntax validation (malformed `[text](url)` pairs warning signal). Base score 1.0 minus deductions, floored at 0.0. | Status: done
 
-- [ ] **Implement Code validity scoring** — In `structural-validity.ts`, add code checks: bracket balance (deduct 0.2 per unbalanced pair, critical signal), unterminated string literals (deduct 0.2, critical signal), incomplete constructs at end of output (trailing `=`, `:`, `,`, `(`, `{` — warning signal). | Status: not_done
+- [x] **Implement Code validity scoring** — In `structural-validity.ts`, add code checks: bracket balance (deduct 0.2 per unbalanced pair, critical signal), unterminated string literals (deduct 0.2, critical signal), incomplete constructs at end of output (trailing `=`, `:`, `,`, `(`, `{` — warning signal). | Status: done
 
-- [ ] **Implement XML validity scoring** — In `structural-validity.ts`, add XML checks: tag balance using a stack (deduct 0.2 per unmatched tag, critical signal), well-formedness checks (attribute syntax, proper nesting). | Status: not_done
+- [x] **Implement XML validity scoring** — In `structural-validity.ts`, add XML checks: tag balance using a stack (deduct 0.2 per unmatched tag, critical signal), well-formedness checks (attribute syntax, proper nesting). | Status: done
 
-- [ ] **Implement Text validity scoring** — In `structural-validity.ts`, add text checks: text is always structurally valid (score 1.0). Check for encoding anomalies: garbled characters, replacement characters (U+FFFD), excessive control characters. Each anomaly type deducts 0.1 (info signal). | Status: not_done
+- [x] **Implement Text validity scoring** — In `structural-validity.ts`, add text checks: text is always structurally valid (score 1.0). Check for encoding anomalies: garbled characters, replacement characters (U+FFFD), excessive control characters. Each anomaly type deducts 0.1 (info signal). | Status: done
 
-- [ ] **Implement format detection integration in structural validity** — Wire up format auto-detection in the structural validity dimension. If caller provides `format`, use that. Otherwise, call `format-detect.ts` to auto-detect and score accordingly. | Status: not_done
+- [x] **Implement format detection integration in structural validity** — Wire up format auto-detection in the structural validity dimension. If caller provides `format`, use that. Otherwise, call `format-detect.ts` to auto-detect and score accordingly. | Status: done
 
 ### 4b: Truncation Risk
 
