@@ -88,21 +88,21 @@
 
 ### 4d: Content Coherence
 
-- [ ] **Implement text content extraction for coherence** — In `src/dimensions/content-coherence.ts`, extract text content appropriately by format: JSON — extract all string values and concatenate; code — extract comments and string literals; text/markdown — use full output. | Status: not_done
+- [x] **Implement text content extraction for coherence** — In `src/dimensions/content-coherence.ts`, extract text content appropriately by format: JSON — extract all string values and concatenate; code — extract comments and string literals; text/markdown — use full output. | Status: done
 
-- [ ] **Implement n-gram repetition detection** — Compute 3-gram frequency distribution. Calculate repetition ratio: `(count of 3-grams appearing >1) / (total unique 3-grams)`. Ratio above 0.5 indicates significant repetition. Score: `1.0 - min(1.0, repetitionRatio * 1.5)`. | Status: not_done
+- [x] **Implement n-gram repetition detection** — Compute 3-gram frequency distribution. Calculate repetition ratio: `(count of 3-grams appearing >1) / (total unique 3-grams)`. Ratio above 0.5 indicates significant repetition. Score: `1.0 - min(1.0, repetitionRatio * 1.5)`. | Status: done
 
-- [ ] **Implement sentence repetition detection** — Split into sentences, count exact duplicates. If >20% are duplicates, emit critical signal. Score: `1.0 - (duplicateSentenceCount / totalSentenceCount)`. | Status: not_done
+- [x] **Implement sentence repetition detection** — Split into sentences, count exact duplicates. If >20% are duplicates, emit critical signal. Score: `1.0 - (duplicateSentenceCount / totalSentenceCount)`. | Status: done
 
-- [ ] **Implement sliding window repetition detection** — Check if any contiguous block of 50+ characters repeats verbatim within the output. Catches LLM repetition loops. Each detected block emits a critical signal. | Status: not_done
+- [x] **Implement sliding window repetition detection** — Check if any contiguous block of 50+ characters repeats verbatim within the output. Catches LLM repetition loops. Each detected block emits a critical signal. | Status: done
 
-- [ ] **Implement lexical diversity (Type-Token Ratio)** — Compute `uniqueWords / totalWords`. For outputs >500 words, use moving average TTR (sliding windows of 100 words). Score: `min(1.0, TTR / 0.4)`. Emit warning signal when TTR < 0.2. | Status: not_done
+- [x] **Implement lexical diversity (Type-Token Ratio)** — Compute `uniqueWords / totalWords`. For outputs >500 words, use moving average TTR (sliding windows of 100 words). Score: `min(1.0, TTR / 0.4)`. Emit warning signal when TTR < 0.2. | Status: done
 
-- [ ] **Implement degenerate output detection** — Check for: empty/whitespace only (score 0.0, critical), single character repeated (score 0.0, critical), less than 10 chars for non-trivial prompt (score 0.2, warning), more than 90% punctuation/special characters (score 0.1, critical). | Status: not_done
+- [x] **Implement degenerate output detection** — Check for: empty/whitespace only (score 0.0, critical), single character repeated (score 0.0, critical), less than 10 chars for non-trivial prompt (score 0.2, warning), more than 90% punctuation/special characters (score 0.1, critical). | Status: done
 
-- [ ] **Implement sentence structure analysis** — Check for recognizable sentence structure (capitalization, terminal punctuation). Compute average sentence length. Extremely short (<3 words) or extremely long (>100 words) average adds warning signal. Score: sigmoid centered at 15-20 words per sentence. | Status: not_done
+- [x] **Implement sentence structure analysis** — Check for recognizable sentence structure (capitalization, terminal punctuation). Compute average sentence length. Extremely short (<3 words) or extremely long (>100 words) average adds warning signal. Score: sigmoid centered at 15-20 words per sentence. | Status: done
 
-- [ ] **Implement content coherence composite** — Weighted average of sub-metrics: repetition detection 0.5, lexical diversity 0.25, degenerate output 0.15, sentence structure 0.10. Clamp to [0.0, 1.0]. | Status: not_done
+- [x] **Implement content coherence composite** — Weighted average of sub-metrics: repetition detection 0.5, lexical diversity 0.25, degenerate output 0.15, sentence structure 0.10. Clamp to [0.0, 1.0]. | Status: done
 
 ### 4e: Hallucination Risk
 
