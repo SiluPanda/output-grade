@@ -1,6 +1,6 @@
 {
   "name": "output-grade",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Heuristic LLM output quality scoring without calling another LLM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
