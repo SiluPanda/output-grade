@@ -50,3 +50,4 @@ export { STOPWORDS, removeStopwords } from './patterns/stopwords';
 // ── Grading Dimensions ──────────────────────────────────────────────────────
 
 export { scoreStructuralValidity } from './dimensions/structural-validity';
+export { scoreTruncationRisk } from './dimensions/truncation-risk';

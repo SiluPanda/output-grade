@@ -62,19 +62,19 @@
 
 ### 4b: Truncation Risk
 
-- [ ] **Implement unclosed bracket detection for truncation** — In `src/dimensions/truncation-risk.ts`, detect unclosed brackets using `bracket-balance.ts`. Severity increases with nesting depth. Score contribution: `1.0 - min(1.0, unclosedDepth * 0.3)`. Emit critical signals for each unclosed bracket type. | Status: not_done
+- [x] **Implement unclosed bracket detection for truncation** — In `src/dimensions/truncation-risk.ts`, detect unclosed brackets using `bracket-balance.ts`. Severity increases with nesting depth. Score contribution: `1.0 - min(1.0, unclosedDepth * 0.3)`. Emit critical signals for each unclosed bracket type. | Status: done
 
-- [ ] **Implement incomplete sentence detection** — Detect whether the output ends with a complete sentence (terminal punctuation: `.`, `!`, `?`, `:`, `;`). Handle exceptions: JSON ending with `}` or `]` is complete; code ending with `}`, `)`, or `;` is complete. Incomplete ending: score 0.3. Add appropriate signals. | Status: not_done
+- [x] **Implement incomplete sentence detection** — Detect whether the output ends with a complete sentence (terminal punctuation: `.`, `!`, `?`, `:`, `;`). Handle exceptions: JSON ending with `}` or `]` is complete; code ending with `}`, `)`, or `;` is complete. Incomplete ending: score 0.3. Add appropriate signals. | Status: done
 
-- [ ] **Implement unclosed markdown fence detection for truncation** — Detect opening triple backticks without matching close. Score contribution: 0.2 (strongly truncated). Emit critical signal. | Status: not_done
+- [x] **Implement unclosed markdown fence detection for truncation** — Detect opening triple backticks without matching close. Score contribution: 0.2 (strongly truncated). Emit critical signal. | Status: done
 
-- [ ] **Implement incomplete list detection** — Detect numbered lists with incomplete sequences: list that stops mid-item, or promises N items but contains fewer. Emit warning signals. | Status: not_done
+- [x] **Implement incomplete list detection** — Detect numbered lists with incomplete sequences: list that stops mid-item, or promises N items but contains fewer. Emit warning signals. | Status: done
 
-- [ ] **Implement abrupt ending pattern detection** — Detect: ellipsis at end after partial word/sentence, hyphenated word break ("impor-"), unclosed string literal (odd number of `"` in last line). Emit appropriate signals. | Status: not_done
+- [x] **Implement abrupt ending pattern detection** — Detect: ellipsis at end after partial word/sentence, hyphenated word break ("impor-"), unclosed string literal (odd number of `"` in last line). Emit appropriate signals. | Status: done
 
-- [ ] **Implement content-length heuristic for truncation** — Detect obvious cases where output is suspiciously short relative to its content (e.g., starts with "Here are 10 examples:" but contains only 2). Emit warning signals when detected. | Status: not_done
+- [x] **Implement content-length heuristic for truncation** — Detect obvious cases where output is suspiciously short relative to its content (e.g., starts with "Here are 10 examples:" but contains only 2). Emit warning signals when detected. | Status: done
 
-- [ ] **Implement truncation risk composite** — Combine sub-scores using minimum (worst-case approach). Truncation is binary-ish — the output is either complete or not — so the composite uses the worst indicator. Clamp final score to [0.0, 1.0]. | Status: not_done
+- [x] **Implement truncation risk composite** — Combine sub-scores using minimum (worst-case approach). Truncation is binary-ish — the output is either complete or not — so the composite uses the worst indicator. Clamp final score to [0.0, 1.0]. | Status: done
 
 ### 4c: Refusal Detection
 
