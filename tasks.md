@@ -106,19 +106,19 @@
 
 ### 4e: Hallucination Risk
 
-- [ ] **Implement hedging language detection** — In `src/dimensions/hallucination-risk.ts`, scan for hedging phrases using the hedging catalog. Compute hedging density: `hedgingPhraseCount / sentenceCount`. Score: `1.0 - min(1.0, hedgingDensity * 2.5)`. Emit warning signals for each phrase with location. | Status: not_done
+- [x] **Implement hedging language detection** — In `src/dimensions/hallucination-risk.ts`, scan for hedging phrases using the hedging catalog. Compute hedging density: `hedgingPhraseCount / sentenceCount`. Score: `1.0 - min(1.0, hedgingDensity * 2.5)`. Emit warning signals for each phrase with location. | Status: done
 
-- [ ] **Implement fabricated URL detection** — Extract URLs using `url-extract.ts`. Check each for fabrication indicators (5+ path segments, generic example domains, implausible structure, known-domain path mismatches). Each suspicious URL emits warning signal. More than 2 suspicious URLs emit critical signal. Score: `1.0 - min(1.0, suspiciousUrlCount * 0.3)`. | Status: not_done
+- [x] **Implement fabricated URL detection** — Extract URLs using `url-extract.ts`. Check each for fabrication indicators (5+ path segments, generic example domains, implausible structure, known-domain path mismatches). Each suspicious URL emits warning signal. More than 2 suspicious URLs emit critical signal. Score: `1.0 - min(1.0, suspiciousUrlCount * 0.3)`. | Status: done
 
-- [ ] **Implement fabricated citation detection** — Scan for academic citation patterns: `Author (Year)`, `Author et al. (Year)`, `[N]` references, `(Author, Year)`. Plausibility checks: year range (before 1900 or after current year), single-word author names that look like common nouns, very long/unusual journal names. Score: `1.0 - min(1.0, implausibleCitationCount * 0.25)`. | Status: not_done
+- [x] **Implement fabricated citation detection** — Scan for academic citation patterns: `Author (Year)`, `Author et al. (Year)`, `[N]` references, `(Author, Year)`. Plausibility checks: year range (before 1900 or after current year), single-word author names that look like common nouns, very long/unusual journal names. Score: `1.0 - min(1.0, implausibleCitationCount * 0.25)`. | Status: done
 
-- [ ] **Implement impossible date detection** — Extract dates using `date-extract.ts`. Flag impossible dates (Feb 30, month 13, day 32) as critical signals, future dates beyond horizon as warning signals. Score: `1.0 - min(1.0, impossibleDateCount * 0.4)`. | Status: not_done
+- [x] **Implement impossible date detection** — Extract dates using `date-extract.ts`. Flag impossible dates (Feb 30, month 13, day 32) as critical signals, future dates beyond horizon as warning signals. Score: `1.0 - min(1.0, impossibleDateCount * 0.4)`. | Status: done
 
-- [ ] **Implement self-contradiction detection** — Scan for explicit contradiction patterns: "however, this is not true" after declarative statements, "actually" or "correction" mid-output, negation of previously stated claims with same noun phrases. Each contradiction emits warning signal. Score: `1.0 - min(1.0, contradictionCount * 0.3)`. | Status: not_done
+- [x] **Implement self-contradiction detection** — Scan for explicit contradiction patterns: "however, this is not true" after declarative statements, "actually" or "correction" mid-output, negation of previously stated claims with same noun phrases. Each contradiction emits warning signal. Score: `1.0 - min(1.0, contradictionCount * 0.3)`. | Status: done
 
-- [ ] **Implement confidence inflation detection** — Scan for high-confidence phrases ("definitely", "certainly", "without a doubt", "100%", "guaranteed", "always", "never") combined with factual claims. Each occurrence emits info signal. Score: `1.0 - min(1.0, inflationCount * 0.1)`. | Status: not_done
+- [x] **Implement confidence inflation detection** — Scan for high-confidence phrases ("definitely", "certainly", "without a doubt", "100%", "guaranteed", "always", "never") combined with factual claims. Each occurrence emits info signal. Score: `1.0 - min(1.0, inflationCount * 0.1)`. | Status: done
 
-- [ ] **Implement hallucination risk composite** — Combine sub-scores using minimum (worst-case approach). One strongly present indicator floors the entire score. Clamp to [0.0, 1.0]. | Status: not_done
+- [x] **Implement hallucination risk composite** — Combine sub-scores using minimum (worst-case approach). One strongly present indicator floors the entire score. Clamp to [0.0, 1.0]. | Status: done
 
 ### 4f: Schema Completeness
 
