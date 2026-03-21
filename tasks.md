@@ -78,13 +78,13 @@
 
 ### 4c: Refusal Detection
 
-- [ ] **Implement refusal phrase scanning** — In `src/dimensions/refusal-detection.ts`, scan output against the refusal phrase catalog. Collect all matches with locations and categories. | Status: not_done
+- [x] **Implement refusal phrase scanning** — In `src/dimensions/refusal-detection.ts`, scan output against the refusal phrase catalog. Collect all matches with locations and categories. | Status: done
 
-- [ ] **Implement refusal classification logic** — Classify as: full refusal (entire output is refusal messages, score 0.0), partial refusal (mix of refusal and substantive content, score: `1.0 - (refusalSentenceCount / totalSentenceCount)` clamped to [0.3, 0.9]), or no refusal (score 1.0). | Status: not_done
+- [x] **Implement refusal classification logic** — Classify as: full refusal (entire output is refusal messages, score 0.0), partial refusal (mix of refusal and substantive content, score: `1.0 - (refusalSentenceCount / totalSentenceCount)` clamped to [0.3, 0.9]), or no refusal (score 1.0). | Status: done
 
-- [ ] **Implement identity disclosure scoring** — "As an AI" type phrases: softer signal, deduct 0.05 per occurrence down to a floor of 0.7. Emit info signals for each disclosure. | Status: not_done
+- [x] **Implement identity disclosure scoring** — "As an AI" type phrases: softer signal, deduct 0.05 per occurrence down to a floor of 0.7. Emit info signals for each disclosure. | Status: done
 
-- [ ] **Implement context-sensitive refusal detection** — When caller provides the original `prompt`, check whether the refusal is topically related to the prompt vs. a generic refusal. Report distinction in signals (does not change score). | Status: not_done
+- [x] **Implement context-sensitive refusal detection** — When caller provides the original `prompt`, check whether the refusal is topically related to the prompt vs. a generic refusal. Report distinction in signals (does not change score). | Status: done
 
 ### 4d: Content Coherence
 
