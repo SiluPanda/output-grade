@@ -26,3 +26,15 @@ export {
 } from './defaults';
 
 export type { CriticalFloorConfig } from './defaults';
+
+// ── Utilities ────────────────────────────────────────────────────────────────
+
+export { tokenize } from './utils/tokenizer';
+export { splitSentences } from './utils/sentences';
+export { computeNgrams, repetitionRatio } from './utils/ngrams';
+export { detectFormat } from './utils/format-detect';
+export { checkBracketBalance } from './utils/bracket-balance';
+export { lenientJsonParse } from './utils/json-parse';
+
+export type { BracketBalance } from './utils/bracket-balance';
+export type { JsonParseResult } from './utils/json-parse';
