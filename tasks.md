@@ -194,17 +194,17 @@
 
 ## Phase 6: Grader Factory
 
-- [ ] **Implement `createGrader()` factory** — In `src/grader.ts`, implement `createGrader(config)` that accepts `GraderConfig` (weights, passThreshold, criticalFloors, customPatterns, stopwords). Returns a `Grader` instance whose `grade()` merges instance config with per-call options. Parse configuration once so it is reused across calls. | Status: not_done
+- [x] **Implement `createGrader()` factory** — In `src/grader.ts`, implement `createGrader(config)` that accepts `GraderConfig` (weights, passThreshold, criticalFloors, customPatterns, stopwords). Returns a `Grader` instance whose `grade()` merges instance config with per-call options. Parse configuration once so it is reused across calls. | Status: done
 
-- [ ] **Implement custom pattern merging in grader** — Custom patterns provided to `createGrader()` are appended to the built-in catalog (not replacements). Ensure the merged pattern catalog is built once at construction time and reused for all subsequent `grade()` calls. | Status: not_done
+- [x] **Implement custom pattern merging in grader** — Custom patterns provided to `createGrader()` are appended to the built-in catalog (not replacements). Ensure the merged pattern catalog is built once at construction time and reused for all subsequent `grade()` calls. | Status: done
 
-- [ ] **Implement per-dimension methods on grader instance** — Expose `gradeSchema`, `gradeStructure`, `gradeCoherence`, `detectHallucinations`, `detectTruncation`, `detectRefusal`, `gradeRelevance`, `gradeFormatCompliance` on the grader instance, each using the instance's custom configuration (custom patterns, stopwords). | Status: not_done
+- [x] **Implement per-dimension methods on grader instance** — Expose `gradeSchema`, `gradeStructure`, `gradeCoherence`, `detectHallucinations`, `detectTruncation`, `detectRefusal`, `gradeRelevance`, `gradeFormatCompliance` on the grader instance, each using the instance's custom configuration (custom patterns, stopwords). | Status: done
 
 ---
 
 ## Phase 7: Public API Exports
 
-- [ ] **Implement public API in `src/index.ts`** — Export: `grade` (main function), `createGrader` (factory), and all per-dimension functions (`gradeSchema`, `gradeStructure`, `gradeCoherence`, `detectHallucinations`, `detectTruncation`, `detectRefusal`, `gradeRelevance`, `gradeFormatCompliance`). Also export all type interfaces for TypeScript consumers. Verify the module compiles and all exports resolve correctly. | Status: not_done
+- [x] **Implement public API in `src/index.ts`** — Export: `grade` (main function), `createGrader` (factory), and all per-dimension functions (`gradeSchema`, `gradeStructure`, `gradeCoherence`, `detectHallucinations`, `detectTruncation`, `detectRefusal`, `gradeRelevance`, `gradeFormatCompliance`). Also export all type interfaces for TypeScript consumers. Verify the module compiles and all exports resolve correctly. | Status: done
 
 ---
 

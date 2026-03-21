@@ -61,3 +61,7 @@ export { scoreFormatCompliance } from './dimensions/format-compliance';
 // ── Composite Grader ─────────────────────────────────────────────────────────
 
 export { grade } from './grade';
+
+// ── Grader Factory ──────────────────────────────────────────────────────────
+
+export { createGrader } from './grader';
