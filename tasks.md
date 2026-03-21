@@ -122,17 +122,17 @@
 
 ### 4f: Schema Completeness
 
-- [ ] **Implement JSON parsing for schema scoring** — In `src/dimensions/schema-completeness.ts`, attempt to parse output as JSON. If parsing fails, return score 0.0 with critical signal. If no schema provided, return score 1.0 (neutral). | Status: not_done
+- [x] **Implement JSON parsing for schema scoring** — In `src/dimensions/schema-completeness.ts`, attempt to parse output as JSON. If parsing fails, return score 0.0 with critical signal. If no schema provided, return score 1.0 (neutral). | Status: done
 
-- [ ] **Implement required field checking** — For each required field in schema: check existence (missing = critical signal, sub-score 0), check type correctness (wrong type = warning signal, sub-score 0.5), check emptiness (empty string/array/null/undefined = warning signal, sub-score 0.7), correct field = sub-score 1.0. | Status: not_done
+- [x] **Implement required field checking** — For each required field in schema: check existence (missing = critical signal, sub-score 0), check type correctness (wrong type = warning signal, sub-score 0.5), check emptiness (empty string/array/null/undefined = warning signal, sub-score 0.7), correct field = sub-score 1.0. | Status: done
 
-- [ ] **Implement optional field checking** — For optional fields: present and correct type = 1.0, present but wrong type = 0.5, missing = 0.8 (not penalized heavily). Optional fields contribute with half the weight of required fields. | Status: not_done
+- [x] **Implement optional field checking** — For optional fields: present and correct type = 1.0, present but wrong type = 0.5, missing = 0.8 (not penalized heavily). Optional fields contribute with half the weight of required fields. | Status: done
 
-- [ ] **Implement array field validation** — Check minimum length when `minItems` is specified. Empty array when `minItems: 1` adds warning signal. | Status: not_done
+- [x] **Implement array field validation** — Check minimum length when `minItems` is specified. Empty array when `minItems: 1` adds warning signal. | Status: done
 
-- [ ] **Implement nested object recursion** — For nested objects, recurse into the child schema. The nested object's completeness score contributes to the parent field's sub-score. | Status: not_done
+- [x] **Implement nested object recursion** — For nested objects, recurse into the child schema. The nested object's completeness score contributes to the parent field's sub-score. | Status: done
 
-- [ ] **Implement schema completeness composite** — Weighted average of all field sub-scores: required fields weighted 1.0, optional fields weighted 0.5. Clamp to [0.0, 1.0]. | Status: not_done
+- [x] **Implement schema completeness composite** — Weighted average of all field sub-scores: required fields weighted 1.0, optional fields weighted 0.5. Clamp to [0.0, 1.0]. | Status: done
 
 ### 4g: Relevance
 
