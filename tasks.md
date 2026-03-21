@@ -136,19 +136,19 @@
 
 ### 4g: Relevance
 
-- [ ] **Implement keyword extraction from prompt** — In `src/dimensions/relevance.ts`, tokenize the prompt, lowercase, remove stopwords (using built-in or configured list), remove single-character tokens. Return the prompt's keyword set. If no prompt provided, return score 1.0 (neutral). | Status: not_done
+- [x] **Implement keyword extraction from prompt** — In `src/dimensions/relevance.ts`, tokenize the prompt, lowercase, remove stopwords (using built-in or configured list), remove single-character tokens. Return the prompt's keyword set. If no prompt provided, return score 1.0 (neutral). | Status: done
 
-- [ ] **Implement keyword overlap scoring** — Compute: `keywordOverlap = |promptKeywords intersection outputKeywords| / |promptKeywords|`. Score: `min(1.0, keywordOverlap * 1.5)` (0.67 overlap gives perfect score). | Status: not_done
+- [x] **Implement keyword overlap scoring** — Compute: `keywordOverlap = |promptKeywords intersection outputKeywords| / |promptKeywords|`. Score: `min(1.0, keywordOverlap * 1.5)` (0.67 overlap gives perfect score). | Status: done
 
-- [ ] **Implement structural alignment checking** — Detect structural instructions in the prompt: "list"/"enumerate"/"bullet" -> check for list items; "JSON"/"object"/"structured" -> check for JSON; "code"/"function"/"implement" -> check for code/fences; "table"/"columns" -> check for table structure. Deduct 0.1-0.3 for mismatches. | Status: not_done
+- [x] **Implement structural alignment checking** — Detect structural instructions in the prompt: "list"/"enumerate"/"bullet" -> check for list items; "JSON"/"object"/"structured" -> check for JSON; "code"/"function"/"implement" -> check for code/fences; "table"/"columns" -> check for table structure. Deduct 0.1-0.3 for mismatches. | Status: done
 
-- [ ] **Implement topic drift detection** — Split output into quarters. Compute keyword overlap of each quarter with the prompt. If first quarter has high overlap (>0.5) but last quarter has low overlap (<0.1), add warning signal and deduct 0.15. | Status: not_done
+- [x] **Implement topic drift detection** — Split output into quarters. Compute keyword overlap of each quarter with the prompt. If first quarter has high overlap (>0.5) but last quarter has low overlap (<0.1), add warning signal and deduct 0.15. | Status: done
 
-- [ ] **Implement length reasonableness checking** — If prompt implies detailed response ("explain in detail", "comprehensive", "write a long") but output < 100 chars, deduct 0.2. If prompt implies brief response ("in one sentence", "briefly", "summarize") but output > 2000 chars, deduct 0.1. | Status: not_done
+- [x] **Implement length reasonableness checking** — If prompt implies detailed response ("explain in detail", "comprehensive", "write a long") but output < 100 chars, deduct 0.2. If prompt implies brief response ("in one sentence", "briefly", "summarize") but output > 2000 chars, deduct 0.1. | Status: done
 
-- [ ] **Implement expected output comparison** — When caller provides `expected` output, compute token-level Jaccard similarity: `|expectedTokens intersection outputTokens| / |expectedTokens union outputTokens|`. Blend with keyword overlap: `similarity * 0.5 + keywordOverlapScore * 0.5`. | Status: not_done
+- [x] **Implement expected output comparison** — When caller provides `expected` output, compute token-level Jaccard similarity: `|expectedTokens intersection outputTokens| / |expectedTokens union outputTokens|`. Blend with keyword overlap: `similarity * 0.5 + keywordOverlapScore * 0.5`. | Status: done
 
-- [ ] **Implement relevance composite** — Weighted average: keyword overlap 0.5, structural alignment 0.2, topic drift 0.15, length reasonableness 0.15. Clamp to [0.0, 1.0]. | Status: not_done
+- [x] **Implement relevance composite** — Weighted average: keyword overlap 0.5, structural alignment 0.2, topic drift 0.15, length reasonableness 0.15. Clamp to [0.0, 1.0]. | Status: done
 
 ### 4h: Format Compliance
 

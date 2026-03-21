@@ -55,3 +55,4 @@ export { scoreRefusalDetection } from './dimensions/refusal-detection';
 export { scoreContentCoherence } from './dimensions/content-coherence';
 export { scoreHallucinationRisk } from './dimensions/hallucination-risk';
 export { scoreSchemaCompleteness } from './dimensions/schema-completeness';
+export { scoreRelevance } from './dimensions/relevance';
