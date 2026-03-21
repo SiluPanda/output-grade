@@ -2,6 +2,7 @@ import type { DimensionResult, Signal } from '../types';
 import { HEDGING_PATTERNS } from '../patterns/hedging';
 import { CONFIDENCE_PATTERNS } from '../patterns/confidence';
 import { splitSentences } from '../utils/sentences';
+import { extractUrls } from '../utils/url-extract';
 
 /**
  * Score the hallucination risk of an LLM output.
@@ -54,36 +55,19 @@ export function scoreHallucinationRisk(output: string): DimensionResult {
   }
   subScores.push(Math.max(0, 1.0 - Math.min(1.0, inflationCount * 0.1)));
 
-  // 3. Fabricated URL detection (simple heuristic)
-  const urls = output.match(/https?:\/\/[^\s<>"]+/g) || [];
+  // 3. Fabricated URL detection (via url-extract utility)
+  const urlMatches = extractUrls(output);
   let suspiciousUrls = 0;
-  const exampleDomains = [
-    'example.com',
-    'test.com',
-    'sample.org',
-    'foo.com',
-    'bar.com',
-    'placeholder.com',
-  ];
-  for (const url of urls) {
-    try {
-      const parsed = new URL(url);
-      const pathSegments = parsed.pathname.split('/').filter(Boolean);
-      const isExampleDomain = exampleDomains.some((d) =>
-        parsed.hostname.includes(d),
-      );
-      if (pathSegments.length >= 5 || isExampleDomain) {
-        suspiciousUrls++;
-        signals.push({
-          id: 'hallucination-suspicious-url',
-          severity: suspiciousUrls > 2 ? 'critical' : 'warning',
-          dimension: 'hallucination-risk',
-          message: `Suspicious URL: ${url}`,
-          location: null,
-        });
-      }
-    } catch {
-      /* invalid URL, skip */
+  for (const urlLoc of urlMatches) {
+    if (urlLoc.suspicious) {
+      suspiciousUrls++;
+      signals.push({
+        id: 'hallucination-suspicious-url',
+        severity: suspiciousUrls > 2 ? 'critical' : 'warning',
+        dimension: 'hallucination-risk',
+        message: `Suspicious URL: ${urlLoc.url}`,
+        location: { start: urlLoc.start, end: urlLoc.end },
+      });
     }
   }
   if (suspiciousUrls > 0)
