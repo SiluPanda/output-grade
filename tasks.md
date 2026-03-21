@@ -2,33 +2,33 @@
 
 ## Phase 1: Project Scaffolding & Types
 
-- [ ] **Define TypeScript type definitions** — Create `src/types.ts` with all interfaces from the spec: `GradeReport`, `DimensionScores`, `Signal`, `SignalLocation`, `GradeMeta`, `DimensionResult`, `GradeOptions`, `CustomPatterns`, `JsonSchema`, `GraderConfig`, `Grader`. Include the severity union type `'info' | 'warning' | 'critical'`, the format union type `'json' | 'markdown' | 'code' | 'xml' | 'yaml' | 'text' | 'table' | 'list'`, and the dimension ID string literal union. All fields must match the spec exactly (section 8, Type Definitions). | Status: not_done
+- [x] **Define TypeScript type definitions** — Create `src/types.ts` with all interfaces from the spec: `GradeReport`, `DimensionScores`, `Signal`, `SignalLocation`, `GradeMeta`, `DimensionResult`, `GradeOptions`, `CustomPatterns`, `JsonSchema`, `GraderConfig`, `Grader`. Include the severity union type `'info' | 'warning' | 'critical'`, the format union type `'json' | 'markdown' | 'code' | 'xml' | 'yaml' | 'text' | 'table' | 'list'`, and the dimension ID string literal union. All fields must match the spec exactly (section 8, Type Definitions). | Status: done
 
-- [ ] **Define default configuration constants** — Create `src/defaults.ts` with: default dimension weights (schema-completeness: 0.20, structural-validity: 0.20, content-coherence: 0.15, hallucination-risk: 0.15, truncation-risk: 0.10, refusal-detection: 0.10, relevance: 0.05, format-compliance: 0.05), redistributed weights for when optional dimensions are excluded, default pass threshold (0.7), default critical floor configurations (structural-validity: threshold 0.2/ceiling 0.3, truncation-risk: threshold 0.2/ceiling 0.3, refusal-detection: threshold 0.3/ceiling 0.2). | Status: not_done
+- [x] **Define default configuration constants** — Create `src/defaults.ts` with: default dimension weights (schema-completeness: 0.20, structural-validity: 0.20, content-coherence: 0.15, hallucination-risk: 0.15, truncation-risk: 0.10, refusal-detection: 0.10, relevance: 0.05, format-compliance: 0.05), redistributed weights for when optional dimensions are excluded, default pass threshold (0.7), default critical floor configurations (structural-validity: threshold 0.2/ceiling 0.3, truncation-risk: threshold 0.2/ceiling 0.3, refusal-detection: threshold 0.3/ceiling 0.2). | Status: done
 
-- [ ] **Set up development dependencies** — Install `typescript`, `vitest`, and `eslint` as dev dependencies. Configure ESLint for the project. Verify `npm run build`, `npm run test`, and `npm run lint` scripts all work with the empty project skeleton. | Status: not_done
+- [x] **Set up development dependencies** — Install `typescript`, `vitest`, and `eslint` as dev dependencies. Configure ESLint for the project. Verify `npm run build`, `npm run test`, and `npm run lint` scripts all work with the empty project skeleton. | Status: done
 
-- [ ] **Create directory structure** — Create the directories `src/dimensions/`, `src/patterns/`, `src/utils/`, and `src/__tests__/` as specified in section 16 (File Structure). | Status: not_done
+- [x] **Create directory structure** — Create the directories `src/dimensions/`, `src/patterns/`, `src/utils/`, and `src/__tests__/` as specified in section 16 (File Structure). | Status: done
 
 ---
 
 ## Phase 2: Utility Functions
 
-- [ ] **Implement word tokenizer** — Create `src/utils/tokenizer.ts`. Split text on whitespace, strip leading/trailing punctuation from each token, lowercase, filter empty tokens. Must handle English text well and degrade gracefully (no crashes, no NaN) for non-Latin scripts (CJK, Arabic, Hebrew). This is a simple whitespace-and-punctuation tokenizer, not a linguistic tokenizer. | Status: not_done
+- [x] **Implement word tokenizer** — Create `src/utils/tokenizer.ts`. Split text on whitespace, strip leading/trailing punctuation from each token, lowercase, filter empty tokens. Must handle English text well and degrade gracefully (no crashes, no NaN) for non-Latin scripts (CJK, Arabic, Hebrew). This is a simple whitespace-and-punctuation tokenizer, not a linguistic tokenizer. | Status: done
 
-- [ ] **Implement sentence splitter** — Create `src/utils/sentences.ts`. Split text on `.`, `!`, `?` followed by whitespace and a capital letter (or end of string). Acceptable to mis-split abbreviations like "Dr. Smith" since off-by-one errors in sentence count have negligible impact on density calculations. | Status: not_done
+- [x] **Implement sentence splitter** — Create `src/utils/sentences.ts`. Split text on `.`, `!`, `?` followed by whitespace and a capital letter (or end of string). Acceptable to mis-split abbreviations like "Dr. Smith" since off-by-one errors in sentence count have negligible impact on density calculations. | Status: done
 
-- [ ] **Implement n-gram computation** — Create `src/utils/ngrams.ts`. Compute n-gram frequency distributions (default: trigrams/3-grams) from a list of tokens. Return the frequency map and compute the repetition ratio: `(count of n-grams appearing more than once) / (total unique n-grams)`. | Status: not_done
+- [x] **Implement n-gram computation** — Create `src/utils/ngrams.ts`. Compute n-gram frequency distributions (default: trigrams/3-grams) from a list of tokens. Return the frequency map and compute the repetition ratio: `(count of n-grams appearing more than once) / (total unique n-grams)`. | Status: done
 
 - [ ] **Implement URL extraction and analysis** — Create `src/utils/url-extract.ts`. Extract URLs using regex `https?://[^\s<>"]+`. Analyze each URL for fabrication indicators: 5+ path segments, generic example domains (example.com, test.com, sample.org), implausible structure, known-domain path pattern mismatches (e.g., arxiv.org/abs/ with non-matching paper ID format). Return URLs with their positions and suspicion flags. | Status: not_done
 
 - [ ] **Implement date extraction and validation** — Create `src/utils/date-extract.ts`. Extract dates in common formats: `YYYY-MM-DD`, `MM/DD/YYYY`, `Month DD, YYYY`, etc. Validate: month 1-12, day 1-31 with month-specific maximums, year 1900-2030 (configurable). Flag impossible dates (February 30, month 13, day 32) and future dates beyond a configurable horizon (default: 2 years from current date). Return dates with positions and validity flags. | Status: not_done
 
-- [ ] **Implement bracket balance checker** — Create `src/utils/bracket-balance.ts`. Count opening and closing brackets for each type: `{}`, `[]`, `()`, `<>`. Return the balance (opens minus closes) for each bracket type and the maximum unclosed nesting depth. | Status: not_done
+- [x] **Implement bracket balance checker** — Create `src/utils/bracket-balance.ts`. Count opening and closing brackets for each type: `{}`, `[]`, `()`, `<>`. Return the balance (opens minus closes) for each bracket type and the maximum unclosed nesting depth. | Status: done
 
-- [ ] **Implement lenient JSON parsing utilities** — Create `src/utils/json-parse.ts`. Attempt `JSON.parse()` first. On failure, attempt lenient parsing: strip markdown fences, trim whitespace. If lenient parse succeeds, report the wrapper. If it fails, analyze the parse error to detect common patterns: trailing commas, unquoted keys, single quotes. Return parse result with status and error details. | Status: not_done
+- [x] **Implement lenient JSON parsing utilities** — Create `src/utils/json-parse.ts`. Attempt `JSON.parse()` first. On failure, attempt lenient parsing: strip markdown fences, trim whitespace. If lenient parse succeeds, report the wrapper. If it fails, analyze the parse error to detect common patterns: trailing commas, unquoted keys, single quotes. Return parse result with status and error details. | Status: done
 
-- [ ] **Implement output format detection** — Create `src/utils/format-detect.ts`. Auto-detect format if not provided by caller: attempt JSON parse (starts with `{` or `[`), check for markdown indicators (`#`, triple backticks, `-` lists), check for XML indicators (`<` tags). Default to `'text'` if nothing detected. Return the detected format string. | Status: not_done
+- [x] **Implement output format detection** — Create `src/utils/format-detect.ts`. Auto-detect format if not provided by caller: attempt JSON parse (starts with `{` or `[`), check for markdown indicators (`#`, triple backticks, `-` lists), check for XML indicators (`<` tags). Default to `'text'` if nothing detected. Return the detected format string. | Status: done
 
 ---
 
