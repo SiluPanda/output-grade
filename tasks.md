@@ -152,43 +152,43 @@
 
 ### 4h: Format Compliance
 
-- [ ] **Implement expected format determination** — In `src/dimensions/format-compliance.ts`, determine expected format from the `format` option (explicit) or by detecting format instructions in the prompt: "JSON" -> json, "markdown" -> markdown, "code"/"function"/"implement" -> code, "XML" -> xml, "YAML" -> yaml, "table" -> table, "list"/"bullet points" -> list. If no format detected, return 1.0 (neutral). | Status: not_done
+- [x] **Implement expected format determination** — In `src/dimensions/format-compliance.ts`, determine expected format from the `format` option (explicit) or by detecting format instructions in the prompt: "JSON" -> json, "markdown" -> markdown, "code"/"function"/"implement" -> code, "XML" -> xml, "YAML" -> yaml, "table" -> table, "list"/"bullet points" -> list. If no format detected, return 1.0 (neutral). | Status: done
 
-- [ ] **Implement JSON compliance checking** — When JSON expected: pure JSON = 1.0, JSON in fence = 0.9, JSON extractable from prose = 0.7, no JSON found = 0.0. | Status: not_done
+- [x] **Implement JSON compliance checking** — When JSON expected: pure JSON = 1.0, JSON in fence = 0.9, JSON extractable from prose = 0.7, no JSON found = 0.0. | Status: done
 
-- [ ] **Implement Markdown compliance checking** — When markdown expected: rich markdown formatting = 1.0, minimal formatting = 0.7, plain text with no markdown = 0.3. | Status: not_done
+- [x] **Implement Markdown compliance checking** — When markdown expected: rich markdown formatting = 1.0, minimal formatting = 0.7, plain text with no markdown = 0.3. | Status: done
 
-- [ ] **Implement Code compliance checking** — When code expected: code in fence = 1.0, recognizable code without fence = 0.8, no code = 0.0. | Status: not_done
+- [x] **Implement Code compliance checking** — When code expected: code in fence = 1.0, recognizable code without fence = 0.8, no code = 0.0. | Status: done
 
-- [ ] **Implement XML compliance checking** — When XML expected: well-formed XML = 1.0, partial XML = 0.5, no XML = 0.0. | Status: not_done
+- [x] **Implement XML compliance checking** — When XML expected: well-formed XML = 1.0, partial XML = 0.5, no XML = 0.0. | Status: done
 
-- [ ] **Implement YAML compliance checking** — When YAML expected: valid YAML key-value patterns = 1.0, partial = 0.5, no YAML = 0.0. | Status: not_done
+- [x] **Implement YAML compliance checking** — When YAML expected: valid YAML key-value patterns = 1.0, partial = 0.5, no YAML = 0.0. | Status: done
 
-- [ ] **Implement Table compliance checking** — When table expected: markdown table or tab-separated data = 1.0, list found instead = 0.4, neither = 0.0. | Status: not_done
+- [x] **Implement Table compliance checking** — When table expected: markdown table or tab-separated data = 1.0, list found instead = 0.4, neither = 0.0. | Status: done
 
-- [ ] **Implement List compliance checking** — When list expected: list items (lines starting with `-`, `*`, `1.`) = 1.0, paragraphs instead = 0.3, empty/irrelevant = 0.0. | Status: not_done
+- [x] **Implement List compliance checking** — When list expected: list items (lines starting with `-`, `*`, `1.`) = 1.0, paragraphs instead = 0.3, empty/irrelevant = 0.0. | Status: done
 
-- [ ] **Implement format purity scoring** — For JSON format: deduct 0.1-0.2 for non-JSON content surrounding the JSON (preamble, postamble, explanatory prose) based on the ratio of noise to content. | Status: not_done
+- [x] **Implement format purity scoring** — For JSON format: deduct 0.1-0.2 for non-JSON content surrounding the JSON (preamble, postamble, explanatory prose) based on the ratio of noise to content. | Status: done
 
 ---
 
 ## Phase 5: Composite Score & Grade Report
 
-- [ ] **Implement weight redistribution logic** — In `src/grade.ts`, implement the logic to set non-applicable dimension weights to zero (schema-completeness when no schema, relevance when no prompt, format-compliance when no format) and redistribute remaining weights proportionally so they sum to 1.0. | Status: not_done
+- [x] **Implement weight redistribution logic** — In `src/grade.ts`, implement the logic to set non-applicable dimension weights to zero (schema-completeness when no schema, relevance when no prompt, format-compliance when no format) and redistribute remaining weights proportionally so they sum to 1.0. | Status: done
 
-- [ ] **Implement weighted average composite score** — Compute: `compositeScore = sum(dimensionScore_i * weight_i) / sum(weight_i)` over all applicable dimensions. | Status: not_done
+- [x] **Implement weighted average composite score** — Compute: `compositeScore = sum(dimensionScore_i * weight_i) / sum(weight_i)` over all applicable dimensions. | Status: done
 
-- [ ] **Implement critical dimension floor capping** — After computing weighted average, check each critical dimension against its floor threshold. If any critical dimension is below its threshold, cap composite score at the configured ceiling value. Record which floor was triggered in `meta.criticalFloorTriggered`. | Status: not_done
+- [x] **Implement critical dimension floor capping** — After computing weighted average, check each critical dimension against its floor threshold. If any critical dimension is below its threshold, cap composite score at the configured ceiling value. Record which floor was triggered in `meta.criticalFloorTriggered`. | Status: done
 
-- [ ] **Implement summary generation** — Generate `summary` field using template logic (not LLM): score >= 0.9 -> "high quality, no significant issues"; 0.7-0.89 -> "acceptable, N minor issues: {top issues}"; 0.4-0.69 -> "questionable, N issues: {top issues}, consider retrying"; <0.4 -> "poor, N critical issues: {top issues}, retry recommended". Top issues are 1-3 most severe signals described in natural language. | Status: not_done
+- [x] **Implement summary generation** — Generate `summary` field using template logic (not LLM): score >= 0.9 -> "high quality, no significant issues"; 0.7-0.89 -> "acceptable, N minor issues: {top issues}"; 0.4-0.69 -> "questionable, N issues: {top issues}, consider retrying"; <0.4 -> "poor, N critical issues: {top issues}, retry recommended". Top issues are 1-3 most severe signals described in natural language. | Status: done
 
-- [ ] **Implement signal ordering** — Sort signals by: (1) severity (critical first, warning, info), (2) dimension order (refusal, truncation, structural, schema, hallucination, coherence, relevance, format), (3) location (earlier first). | Status: not_done
+- [x] **Implement signal ordering** — Sort signals by: (1) severity (critical first, warning, info), (2) dimension order (refusal, truncation, structural, schema, hallucination, coherence, relevance, format), (3) location (earlier first). | Status: done
 
-- [ ] **Implement GradeReport assembly** — Assemble the complete `GradeReport` object: composite score, pass/fail determination (score >= passThreshold), passThreshold, dimension scores, ordered signals, summary, and meta (durationMs, weights used, applicable dimensions, critical floor triggered, detected format, output length). Ensure report is a plain object serializable with `JSON.stringify()`. | Status: not_done
+- [x] **Implement GradeReport assembly** — Assemble the complete `GradeReport` object: composite score, pass/fail determination (score >= passThreshold), passThreshold, dimension scores, ordered signals, summary, and meta (durationMs, weights used, applicable dimensions, critical floor triggered, detected format, output length). Ensure report is a plain object serializable with `JSON.stringify()`. | Status: done
 
-- [ ] **Implement the main `grade()` function** — Wire up the full pipeline: validate input, detect format, run all 8 dimension scorers, compute composite score with weight redistribution and critical floors, generate summary, assemble and return GradeReport. Handle empty/null/undefined input as a hard floor (score 0.0, all minimums, critical signal `empty-output`). | Status: not_done
+- [x] **Implement the main `grade()` function** — Wire up the full pipeline: validate input, detect format, run all 8 dimension scorers, compute composite score with weight redistribution and critical floors, generate summary, assemble and return GradeReport. Handle empty/null/undefined input as a hard floor (score 0.0, all minimums, critical signal `empty-output`). | Status: done
 
-- [ ] **Implement pass/fail threshold logic** — The `pass` field is `true` when `score >= passThreshold`. Default passThreshold is 0.7, configurable via options. | Status: not_done
+- [x] **Implement pass/fail threshold logic** — The `pass` field is `true` when `score >= passThreshold`. Default passThreshold is 0.7, configurable via options. | Status: done
 
 ---
 
@@ -366,43 +366,43 @@
 
 ### Format Compliance Tests
 
-- [ ] **Test format compliance: JSON expected, JSON received** — Expect score 1.0. | Status: not_done
+- [x] **Test format compliance: JSON expected, JSON received** — Expect score 1.0. | Status: done
 
-- [ ] **Test format compliance: JSON expected, prose received** — Expect score 0.0. | Status: not_done
+- [x] **Test format compliance: JSON expected, prose received** — Expect score 0.0. | Status: done
 
-- [ ] **Test format compliance: markdown expected, markdown received** — Expect score 1.0. | Status: not_done
+- [x] **Test format compliance: markdown expected, markdown received** — Expect score 1.0. | Status: done
 
-- [ ] **Test format compliance: no format specified** — Expect score 1.0 (neutral). | Status: not_done
+- [x] **Test format compliance: no format specified** — Expect score 1.0 (neutral). | Status: done
 
-- [ ] **Test format compliance: JSON in fence** — JSON expected, JSON received inside code fence. Expect score 0.9. | Status: not_done
+- [x] **Test format compliance: JSON in fence** — JSON expected, JSON received inside code fence. Expect score 0.9. | Status: done
 
-- [ ] **Test format compliance: code expected, code in fence** — Expect score 1.0. | Status: not_done
+- [x] **Test format compliance: code expected, code in fence** — Expect score 1.0. | Status: done
 
-- [ ] **Test format compliance: table expected, list received** — Expect score 0.4. | Status: not_done
+- [x] **Test format compliance: table expected, list received** — Expect score 0.4. | Status: done
 
-- [ ] **Test format compliance: format purity** — JSON expected, JSON received with preamble text. Expect deduction of 0.1-0.2. | Status: not_done
+- [x] **Test format compliance: format purity** — JSON expected, JSON received with preamble text. Expect deduction of 0.1-0.2. | Status: done
 
-- [ ] **Test format compliance: format detected from prompt** — No explicit format option but prompt says "return JSON". Verify format is detected from prompt and compliance is evaluated. | Status: not_done
+- [x] **Test format compliance: format detected from prompt** — No explicit format option but prompt says "return JSON". Verify format is detected from prompt and compliance is evaluated. | Status: done
 
 ---
 
 ## Phase 10: Integration & Composite Tests
 
-- [ ] **Test composite: all dimensions at 1.0** — All dimensions score perfectly. Expect composite 1.0. | Status: not_done
+- [x] **Test composite: all dimensions at 1.0** — All dimensions score perfectly. Expect composite 1.0. | Status: done
 
-- [ ] **Test composite: critical dimension below floor caps composite** — Refusal detection at 0.0 should cap composite at 0.2 regardless of other scores. | Status: not_done
+- [x] **Test composite: critical dimension below floor caps composite** — Refusal detection at 0.0 should cap composite at 0.2 regardless of other scores. | Status: done
 
-- [ ] **Test composite: custom weights applied** — Provide custom weights, verify composite reflects them correctly. | Status: not_done
+- [x] **Test composite: custom weights applied** — Provide custom weights, verify composite reflects them correctly. | Status: done
 
-- [ ] **Test composite: weight redistribution** — When schema, prompt, and format are all absent, verify the always-on dimensions have their weights normalized to sum to 1.0 (structural-validity: 0.286, content-coherence: 0.214, hallucination-risk: 0.214, truncation-risk: 0.143, refusal-detection: 0.143). | Status: not_done
+- [x] **Test composite: weight redistribution** — When schema, prompt, and format are all absent, verify the always-on dimensions have their weights normalized to sum to 1.0 (structural-validity: 0.286, content-coherence: 0.214, hallucination-risk: 0.214, truncation-risk: 0.143, refusal-detection: 0.143). | Status: done
 
-- [ ] **Test composite: pass threshold comparison** — Verify `pass` is true when `score >= threshold` and false when `score < threshold`. Test with custom threshold values. | Status: not_done
+- [x] **Test composite: pass threshold comparison** — Verify `pass` is true when `score >= threshold` and false when `score < threshold`. Test with custom threshold values. | Status: done
 
-- [ ] **Test grade(): full integration with JSON output** — Grade a well-formed JSON output with schema, prompt, and format. Verify all dimensions score, composite is computed, report is complete. Match Example 1 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with JSON output** — Grade a well-formed JSON output with schema, prompt, and format. Verify all dimensions score, composite is computed, report is complete. Match Example 1 from spec section 18. | Status: done
 
 - [ ] **Test grade(): full integration with truncated output** — Grade a truncated JSON output. Match Example 2 from spec section 18. | Status: not_done
 
-- [ ] **Test grade(): full integration with refusal output** — Grade a full refusal. Match Example 3 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with refusal output** — Grade a full refusal. Match Example 3 from spec section 18. | Status: done
 
 - [ ] **Test grade(): full integration with repetition loop** — Grade a repetition loop output. Match Example 4 from spec section 18. | Status: not_done
 
