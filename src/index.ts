@@ -35,9 +35,13 @@ export { computeNgrams, repetitionRatio } from './utils/ngrams';
 export { detectFormat } from './utils/format-detect';
 export { checkBracketBalance } from './utils/bracket-balance';
 export { lenientJsonParse } from './utils/json-parse';
+export { extractUrls } from './utils/url-extract';
+export { extractDates } from './utils/date-extract';
 
 export type { BracketBalance } from './utils/bracket-balance';
 export type { JsonParseResult } from './utils/json-parse';
+export type { UrlLocation } from './utils/url-extract';
+export type { DateLocation } from './utils/date-extract';
 
 // ── Pattern Catalogs ────────────────────────────────────────────────────────
 

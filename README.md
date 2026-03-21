@@ -29,6 +29,24 @@ const report = grade(outputText, {
 });
 ```
 
+## CLI
+
+Grade LLM output from the command line:
+
+```bash
+npx output-grade "Your LLM output text here"
+npx output-grade ./path/to/output.txt --format json
+npx output-grade "Some response" --prompt "Explain quantum computing" --format human
+npx output-grade "Some JSON response" --schema '{"type":"object","required":["title"]}'
+```
+
+Exit code: `0` if the output passes (score ≥ threshold), `1` if it fails.
+
+Options:
+- `--format json|human` — Output format (default: `human`)
+- `--prompt <text>` — Original prompt for relevance scoring
+- `--schema <json>` — JSON schema string for schema-completeness scoring
+
 ## Available Utilities
 
 Low-level utility functions are exported for direct use:
@@ -112,6 +130,34 @@ lenientJsonParse('```json\n{"key": "value"}\n```');
 // { success: true, value: { key: 'value' }, lenient: true }
 ```
 
+### extractUrls(text)
+
+Extracts all URLs from text with character offsets and suspicion flags. A URL is flagged suspicious when its domain is a known example/placeholder domain, its path has 5+ segments, its TLD is all-numeric, or its TLD is longer than 6 characters.
+
+```typescript
+import { extractUrls } from 'output-grade';
+
+extractUrls('Visit https://example.com/page for info.');
+// [{ url: 'https://example.com/page', start: 6, end: 30, suspicious: true, reason: 'example domain' }]
+
+extractUrls('See https://github.com/user/repo for code.');
+// [{ url: 'https://github.com/user/repo', start: 4, end: 32, suspicious: false }]
+```
+
+### extractDates(text, futureHorizonYears?)
+
+Extracts dates from text in four formats (ISO `YYYY-MM-DD`, US `MM/DD/YYYY`, `Month DD, YYYY`, `DD Month YYYY`) with character offsets and validity flags. Flags impossible dates (e.g. Feb 30), out-of-range years (before 1900 or after 2100), and dates beyond `futureHorizonYears` (default: 2) from the current year.
+
+```typescript
+import { extractDates } from 'output-grade';
+
+extractDates('Released 2024-01-15. Event on February 30, 2024.');
+// [
+//   { date: '2024-01-15', start: 9, end: 19, valid: true },
+//   { date: 'February 30, 2024', start: 30, end: 47, valid: false, reason: 'impossible date' }
+// ]
+```
+
 ## Types Reference
 
 All TypeScript types are exported:
@@ -134,6 +180,8 @@ All TypeScript types are exported:
 - `CriticalFloorConfig` — Critical dimension floor configuration
 - `BracketBalance` — Bracket balance check result
 - `JsonParseResult` — Lenient JSON parse result
+- `UrlLocation` — Extracted URL with start/end offsets and suspicion flag
+- `DateLocation` — Extracted date with start/end offsets and validity flag
 
 ## License
 
