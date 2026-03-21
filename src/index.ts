@@ -52,3 +52,4 @@ export { STOPWORDS, removeStopwords } from './patterns/stopwords';
 export { scoreStructuralValidity } from './dimensions/structural-validity';
 export { scoreTruncationRisk } from './dimensions/truncation-risk';
 export { scoreRefusalDetection } from './dimensions/refusal-detection';
+export { scoreContentCoherence } from './dimensions/content-coherence';
