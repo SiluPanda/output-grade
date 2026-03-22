@@ -3,6 +3,7 @@
 Heuristic LLM output quality scoring without calling another LLM.
 
 [![npm version](https://img.shields.io/npm/v/output-grade.svg)](https://www.npmjs.com/package/output-grade)
+[![npm downloads](https://img.shields.io/npm/dt/output-grade.svg)](https://www.npmjs.com/package/output-grade)
 [![license](https://img.shields.io/npm/l/output-grade.svg)](https://github.com/SiluPanda/output-grade/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/output-grade.svg)](https://nodejs.org/)
 [![types](https://img.shields.io/npm/types/output-grade.svg)](https://www.npmjs.com/package/output-grade)
