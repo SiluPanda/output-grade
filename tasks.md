@@ -20,9 +20,9 @@
 
 - [x] **Implement n-gram computation** — Create `src/utils/ngrams.ts`. Compute n-gram frequency distributions (default: trigrams/3-grams) from a list of tokens. Return the frequency map and compute the repetition ratio: `(count of n-grams appearing more than once) / (total unique n-grams)`. | Status: done
 
-- [ ] **Implement URL extraction and analysis** — Create `src/utils/url-extract.ts`. Extract URLs using regex `https?://[^\s<>"]+`. Analyze each URL for fabrication indicators: 5+ path segments, generic example domains (example.com, test.com, sample.org), implausible structure, known-domain path pattern mismatches (e.g., arxiv.org/abs/ with non-matching paper ID format). Return URLs with their positions and suspicion flags. | Status: not_done
+- [x] **Implement URL extraction and analysis** — Create `src/utils/url-extract.ts`. Extract URLs using regex `https?://[^\s<>"]+`. Analyze each URL for fabrication indicators: 5+ path segments, generic example domains (example.com, test.com, sample.org), implausible structure, known-domain path pattern mismatches (e.g., arxiv.org/abs/ with non-matching paper ID format). Return URLs with their positions and suspicion flags. | Status: done
 
-- [ ] **Implement date extraction and validation** — Create `src/utils/date-extract.ts`. Extract dates in common formats: `YYYY-MM-DD`, `MM/DD/YYYY`, `Month DD, YYYY`, etc. Validate: month 1-12, day 1-31 with month-specific maximums, year 1900-2030 (configurable). Flag impossible dates (February 30, month 13, day 32) and future dates beyond a configurable horizon (default: 2 years from current date). Return dates with positions and validity flags. | Status: not_done
+- [x] **Implement date extraction and validation** — Create `src/utils/date-extract.ts`. Extract dates in common formats: `YYYY-MM-DD`, `MM/DD/YYYY`, `Month DD, YYYY`, etc. Validate: month 1-12, day 1-31 with month-specific maximums, year 1900-2030 (configurable). Flag impossible dates (February 30, month 13, day 32) and future dates beyond a configurable horizon (default: 2 years from current date). Return dates with positions and validity flags. | Status: done
 
 - [x] **Implement bracket balance checker** — Create `src/utils/bracket-balance.ts`. Count opening and closing brackets for each type: `{}`, `[]`, `()`, `<>`. Return the balance (opens minus closes) for each bracket type and the maximum unclosed nesting depth. | Status: done
 
@@ -226,7 +226,7 @@
 
 - [ ] **Implement CLI exit codes** — Exit 0 when output passes threshold (grade >= threshold), exit 1 when output fails threshold (grade < threshold), exit 2 for usage errors (invalid options, missing input, unreadable file). | Status: not_done
 
-- [ ] **Configure CLI bin entry point** — Add `"bin": { "output-grade": "dist/cli.js" }` to `package.json`. Ensure `cli.ts` has proper shebang (`#!/usr/bin/env node`) and is executable after build. | Status: not_done
+- [x] **Configure CLI bin entry point** — Add `"bin": { "output-grade": "dist/cli.js" }` to `package.json`. Ensure `cli.ts` has proper shebang (`#!/usr/bin/env node`) and is executable after build. | Status: done
 
 ---
 
@@ -234,135 +234,135 @@
 
 ### Schema Completeness Tests
 
-- [ ] **Test schema completeness: all fields present and correct types** — Input with all required fields present, correct types, non-empty. Expect score ~1.0, no critical signals. | Status: not_done
+- [x] **Test schema completeness: all fields present and correct types** — Input with all required fields present, correct types, non-empty. Expect score ~1.0, no critical signals. | Status: done
 
-- [ ] **Test schema completeness: required field missing** — Input missing one required field. Expect score drops proportionally, critical signal `missing-required-field`. | Status: not_done
+- [x] **Test schema completeness: required field missing** — Input missing one required field. Expect score drops proportionally, critical signal `missing-required-field`. | Status: done
 
-- [ ] **Test schema completeness: wrong type on required field** — Field exists but has wrong type (e.g., string instead of number). Expect score drops less than missing, warning signal `wrong-type`. | Status: not_done
+- [x] **Test schema completeness: wrong type on required field** — Field exists but has wrong type (e.g., string instead of number). Expect score drops less than missing, warning signal `wrong-type`. | Status: done
 
-- [ ] **Test schema completeness: empty required field** — Required field present but empty (empty string, empty array, null). Expect warning signal `empty-required-field`, sub-score 0.7. | Status: not_done
+- [x] **Test schema completeness: empty required field** — Required field present but empty (empty string, empty array, null). Expect warning signal `empty-required-field`, sub-score 0.7. | Status: done
 
-- [ ] **Test schema completeness: nested object with missing fields** — Nested object schema with missing fields at the nested level. Verify recursive scoring works correctly. | Status: not_done
+- [x] **Test schema completeness: nested object with missing fields** — Nested object schema with missing fields at the nested level. Verify recursive scoring works correctly. | Status: done
 
-- [ ] **Test schema completeness: no schema provided** — No schema in options. Expect score 1.0, no signals. | Status: not_done
+- [x] **Test schema completeness: no schema provided** — No schema in options. Expect score 1.0, no signals. | Status: done
 
-- [ ] **Test schema completeness: output is not valid JSON** — Invalid JSON input when schema is provided. Expect score 0.0, critical signal. | Status: not_done
+- [x] **Test schema completeness: output is not valid JSON** — Invalid JSON input when schema is provided. Expect score 0.0, critical signal. | Status: done
 
-- [ ] **Test schema completeness: optional fields handling** — Optional fields missing, present with correct type, and present with wrong type. Verify half-weight contribution and correct sub-scores (0.8 for missing, 0.5 for wrong type, 1.0 for correct). | Status: not_done
+- [x] **Test schema completeness: optional fields handling** — Optional fields missing, present with correct type, and present with wrong type. Verify half-weight contribution and correct sub-scores (0.8 for missing, 0.5 for wrong type, 1.0 for correct). | Status: done
 
 - [ ] **Test schema completeness: array minItems validation** — Array field with `minItems: 1` but empty array. Expect warning signal. | Status: not_done
 
 ### Structural Validity Tests
 
-- [ ] **Test structural validity: valid JSON** — Well-formed JSON input. Expect score 1.0. | Status: not_done
+- [x] **Test structural validity: valid JSON** — Well-formed JSON input. Expect score 1.0. | Status: done
 
-- [ ] **Test structural validity: JSON with trailing comma** — JSON with trailing comma. Expect score ~0.7, warning signal. | Status: not_done
+- [x] **Test structural validity: JSON with trailing comma** — JSON with trailing comma. Expect score ~0.7, warning signal. | Status: done
 
-- [ ] **Test structural validity: completely unparseable text as JSON** — Garbage text when format is JSON. Expect score 0.0, critical signal. | Status: not_done
+- [x] **Test structural validity: completely unparseable text as JSON** — Garbage text when format is JSON. Expect score 0.0, critical signal. | Status: done
 
-- [ ] **Test structural validity: JSON wrapped in markdown fences** — JSON inside triple backticks. Expect score ~0.8 (lenient parse succeeds), info signal for wrapper. | Status: not_done
+- [x] **Test structural validity: JSON wrapped in markdown fences** — JSON inside triple backticks. Expect score ~0.8 (lenient parse succeeds), info signal for wrapper. | Status: done
 
-- [ ] **Test structural validity: markdown with unclosed fence** — Markdown with opening triple backticks but no closing. Expect score drops by 0.3, critical signal. | Status: not_done
+- [x] **Test structural validity: markdown with unclosed fence** — Markdown with opening triple backticks but no closing. Expect score drops by 0.3, critical signal. | Status: done
 
-- [ ] **Test structural validity: markdown heading level skip** — Markdown jumping from `##` to `####`. Expect score drops by 0.05, info signal. | Status: not_done
+- [x] **Test structural validity: markdown heading level skip** — Markdown jumping from `##` to `####`. Expect score drops by 0.05, info signal. | Status: done
 
-- [ ] **Test structural validity: balanced brackets in code** — Code with all brackets balanced. Expect score 1.0. | Status: not_done
+- [x] **Test structural validity: balanced brackets in code** — Code with all brackets balanced. Expect score 1.0. | Status: done
 
-- [ ] **Test structural validity: unbalanced brackets in code** — Code with unbalanced brackets. Expect deduction 0.2 per pair, critical signal. | Status: not_done
+- [x] **Test structural validity: unbalanced brackets in code** — Code with unbalanced brackets. Expect deduction 0.2 per pair, critical signal. | Status: done
 
-- [ ] **Test structural validity: XML with balanced tags** — Well-formed XML. Expect score 1.0. | Status: not_done
+- [x] **Test structural validity: XML with balanced tags** — Well-formed XML. Expect score 1.0. | Status: done
 
-- [ ] **Test structural validity: XML with unbalanced tags** — XML with unmatched tags. Expect deduction 0.2 per unmatched tag, critical signal. | Status: not_done
+- [x] **Test structural validity: XML with unbalanced tags** — XML with unmatched tags. Expect deduction 0.2 per unmatched tag, critical signal. | Status: done
 
-- [ ] **Test structural validity: text with encoding anomalies** — Text with replacement characters (U+FFFD). Expect deduction 0.1, info signal. | Status: not_done
+- [x] **Test structural validity: text with encoding anomalies** — Text with replacement characters (U+FFFD). Expect deduction 0.1, info signal. | Status: done
 
-- [ ] **Test structural validity: format auto-detection** — Test that format is correctly auto-detected when not explicitly provided. | Status: not_done
+- [x] **Test structural validity: format auto-detection** — Test that format is correctly auto-detected when not explicitly provided. | Status: done
 
 ### Content Coherence Tests
 
-- [ ] **Test coherence: normal prose** — Well-written paragraph with diverse vocabulary. Expect high score (>0.8). | Status: not_done
+- [x] **Test coherence: normal prose** — Well-written paragraph with diverse vocabulary. Expect high score (>0.8). | Status: done
 
-- [ ] **Test coherence: repeated sentence** — Same sentence repeated 10+ times. Expect low score, critical signal `repetition-loop`. | Status: not_done
+- [x] **Test coherence: repeated sentence** — Same sentence repeated 10+ times. Expect low score, critical signal `repetition-loop`. | Status: done
 
-- [ ] **Test coherence: empty output** — Empty string. Expect score 0.0, critical signal `degenerate-output`. | Status: not_done
+- [x] **Test coherence: empty output** — Empty string. Expect score 0.0, critical signal `degenerate-output`. | Status: done
 
-- [ ] **Test coherence: single character repeated** — One character repeated 1000 times. Expect score 0.0, critical signal. | Status: not_done
+- [x] **Test coherence: single character repeated** — One character repeated 1000 times. Expect score 0.0, critical signal. | Status: done
 
-- [ ] **Test coherence: high lexical diversity** — Text with many unique words. Expect high TTR, high score. | Status: not_done
+- [x] **Test coherence: high lexical diversity** — Text with many unique words. Expect high TTR, high score. | Status: done
 
-- [ ] **Test coherence: low lexical diversity** — Same 5 words repeated many times. Expect low TTR, low score, warning signal `low-lexical-diversity`. | Status: not_done
+- [x] **Test coherence: low lexical diversity** — Same 5 words repeated many times. Expect low TTR, low score, warning signal `low-lexical-diversity`. | Status: done
 
-- [ ] **Test coherence: sliding window repetition** — 50+ character block repeated verbatim. Expect critical signal. | Status: not_done
+- [x] **Test coherence: sliding window repetition** — 50+ character block repeated verbatim. Expect critical signal. | Status: done
 
-- [ ] **Test coherence: very short output** — Output less than 10 characters. Expect score 0.2, warning signal. | Status: not_done
+- [x] **Test coherence: very short output** — Output less than 10 characters. Expect score 0.2, warning signal. | Status: done
 
-- [ ] **Test coherence: 90%+ punctuation** — Output mostly punctuation/special characters. Expect score 0.1, critical signal. | Status: not_done
+- [x] **Test coherence: 90%+ punctuation** — Output mostly punctuation/special characters. Expect score 0.1, critical signal. | Status: done
 
 ### Hallucination Risk Tests
 
-- [ ] **Test hallucination: no hedging phrases** — Clean text with no hedging. Expect score 1.0, no signals. | Status: not_done
+- [x] **Test hallucination: no hedging phrases** — Clean text with no hedging. Expect score 1.0, no signals. | Status: done
 
-- [ ] **Test hallucination: dense hedging** — Text with many hedging phrases ("I think... probably... maybe..."). Expect low score, multiple warning signals. | Status: not_done
+- [x] **Test hallucination: dense hedging** — Text with many hedging phrases ("I think... probably... maybe..."). Expect low score, multiple warning signals. | Status: done
 
-- [ ] **Test hallucination: fabricated URL** — Text containing a clearly fabricated URL with many path segments. Expect score drops, critical/warning signal `fabricated-url`. | Status: not_done
+- [x] **Test hallucination: fabricated URL** — Text containing a clearly fabricated URL with many path segments. Expect score drops, critical/warning signal `fabricated-url`. | Status: done
 
 - [ ] **Test hallucination: impossible date** — Text with February 30 or similar impossible date. Expect score drops, critical signal. | Status: not_done
 
 - [ ] **Test hallucination: future-dated citation** — Citation with year beyond current year. Expect warning signal `implausible-citation`. | Status: not_done
 
-- [ ] **Test hallucination: self-contradiction** — Text that contradicts itself explicitly. Expect warning signal, score drops. | Status: not_done
+- [x] **Test hallucination: self-contradiction** — Text that contradicts itself explicitly. Expect warning signal, score drops. | Status: done
 
-- [ ] **Test hallucination: confidence inflation** — Text with "definitely", "without a doubt" on factual claims. Expect info signals, minor score deduction. | Status: not_done
+- [x] **Test hallucination: confidence inflation** — Text with "definitely", "without a doubt" on factual claims. Expect info signals, minor score deduction. | Status: done
 
-- [ ] **Test hallucination: composite uses minimum** — Verify that the hallucination composite takes the minimum of all sub-scores, not an average. | Status: not_done
+- [x] **Test hallucination: composite uses minimum** — Verify that the hallucination composite takes the minimum of all sub-scores, not an average. | Status: done
 
 ### Truncation Risk Tests
 
-- [ ] **Test truncation: complete output ending with period** — Normal text ending with `.`. Expect score 1.0. | Status: not_done
+- [x] **Test truncation: complete output ending with period** — Normal text ending with `.`. Expect score 1.0. | Status: done
 
-- [ ] **Test truncation: JSON with unclosed bracket** — JSON missing closing brackets. Expect very low score, critical signals. | Status: not_done
+- [x] **Test truncation: JSON with unclosed bracket** — JSON missing closing brackets. Expect very low score, critical signals. | Status: done
 
-- [ ] **Test truncation: text ending mid-sentence** — Text ending with a comma or conjunction. Expect low score. | Status: not_done
+- [x] **Test truncation: text ending mid-sentence** — Text ending with a comma or conjunction. Expect low score. | Status: done
 
-- [ ] **Test truncation: markdown with unclosed code fence** — Markdown with opening fence but no closing. Expect low score, critical signal. | Status: not_done
+- [x] **Test truncation: markdown with unclosed code fence** — Markdown with opening fence but no closing. Expect low score, critical signal. | Status: done
 
-- [ ] **Test truncation: complete JSON structure** — Valid complete JSON. Expect score 1.0. | Status: not_done
+- [x] **Test truncation: complete JSON structure** — Valid complete JSON. Expect score 1.0. | Status: done
 
-- [ ] **Test truncation: incomplete numbered list** — Numbered list that stops mid-item or has fewer items than promised. Expect warning signal. | Status: not_done
+- [x] **Test truncation: incomplete numbered list** — Numbered list that stops mid-item or has fewer items than promised. Expect warning signal. | Status: done
 
 - [ ] **Test truncation: abrupt ending with ellipsis** — Text ending with "..." after partial sentence. Expect signal for abrupt ending. | Status: not_done
 
-- [ ] **Test truncation: hyphenated word break at end** — Text ending with "impor-". Expect signal for truncated word. | Status: not_done
+- [x] **Test truncation: hyphenated word break at end** — Text ending with "impor-". Expect signal for truncated word. | Status: done
 
 ### Refusal Detection Tests
 
-- [ ] **Test refusal: normal answer** — Standard helpful response. Expect score 1.0, no refusal signals. | Status: not_done
+- [x] **Test refusal: normal answer** — Standard helpful response. Expect score 1.0, no refusal signals. | Status: done
 
-- [ ] **Test refusal: full refusal** — "I can't help with that request." Expect score 0.0, critical signal `full-refusal`. | Status: not_done
+- [x] **Test refusal: full refusal** — "I can't help with that request." Expect score 0.0, critical signal `full-refusal`. | Status: done
 
-- [ ] **Test refusal: partial refusal** — Answer with disclaimer/caveat mixed with substantive content. Expect intermediate score (0.3-0.9). | Status: not_done
+- [x] **Test refusal: partial refusal** — Answer with disclaimer/caveat mixed with substantive content. Expect intermediate score (0.3-0.9). | Status: done
 
-- [ ] **Test refusal: AI identity disclosure only** — "As an AI language model" followed by a real answer. Expect slight deduction (floor 0.7), info signal. | Status: not_done
+- [x] **Test refusal: AI identity disclosure only** — "As an AI language model" followed by a real answer. Expect slight deduction (floor 0.7), info signal. | Status: done
 
-- [ ] **Test refusal: multiple refusal categories** — Output hitting multiple refusal categories (direct refusal + policy citation + redirect). Expect very low score. | Status: not_done
+- [x] **Test refusal: multiple refusal categories** — Output hitting multiple refusal categories (direct refusal + policy citation + redirect). Expect very low score. | Status: done
 
 ### Relevance Tests
 
-- [ ] **Test relevance: output directly addresses prompt** — High keyword overlap between prompt and output. Expect high score. | Status: not_done
+- [x] **Test relevance: output directly addresses prompt** — High keyword overlap between prompt and output. Expect high score. | Status: done
 
-- [ ] **Test relevance: completely different topic** — Output has zero keyword overlap with prompt. Expect low score. | Status: not_done
+- [x] **Test relevance: completely different topic** — Output has zero keyword overlap with prompt. Expect low score. | Status: done
 
-- [ ] **Test relevance: no prompt provided** — No prompt in options. Expect score 1.0 (neutral). | Status: not_done
+- [x] **Test relevance: no prompt provided** — No prompt in options. Expect score 1.0 (neutral). | Status: done
 
-- [ ] **Test relevance: structural alignment match** — Prompt asks for JSON, output is JSON. Expect structural alignment bonus. | Status: not_done
+- [x] **Test relevance: structural alignment match** — Prompt asks for JSON, output is JSON. Expect structural alignment bonus. | Status: done
 
-- [ ] **Test relevance: structural alignment mismatch** — Prompt asks for JSON, output is prose. Expect deduction. | Status: not_done
+- [x] **Test relevance: structural alignment mismatch** — Prompt asks for JSON, output is prose. Expect deduction. | Status: done
 
-- [ ] **Test relevance: topic drift** — Output starts on-topic but drifts off-topic in the second half. Expect warning signal, deduction. | Status: not_done
+- [x] **Test relevance: topic drift** — Output starts on-topic but drifts off-topic in the second half. Expect warning signal, deduction. | Status: done
 
-- [ ] **Test relevance: length reasonableness** — Prompt asks for detail, output is very short. Expect deduction. | Status: not_done
+- [x] **Test relevance: length reasonableness** — Prompt asks for detail, output is very short. Expect deduction. | Status: done
 
-- [ ] **Test relevance: expected output comparison** — Caller provides expected output. Verify Jaccard similarity is computed and blended with keyword overlap. | Status: not_done
+- [x] **Test relevance: expected output comparison** — Caller provides expected output. Verify Jaccard similarity is computed and blended with keyword overlap. | Status: done
 
 ### Format Compliance Tests
 
@@ -410,7 +410,7 @@
 
 - [ ] **Test grade(): full integration with markdown output** — Grade markdown with minor issues. Match Example 6 from spec section 18. | Status: not_done
 
-- [ ] **Test createGrader(): factory with custom config** — Create grader with custom weights, threshold, and custom patterns. Verify grade() uses merged config. | Status: not_done
+- [x] **Test createGrader(): factory with custom config** — Create grader with custom weights, threshold, and custom patterns. Verify grade() uses merged config. | Status: done
 
 - [ ] **Test createGrader(): custom patterns are appended** — Verify custom patterns are appended to built-in catalog, not replacements. | Status: not_done
 
@@ -420,33 +420,33 @@
 
 ## Phase 11: Signal Tests
 
-- [ ] **Test signal structure** — Verify each signal type has correct `id`, `severity`, `dimension`, and `message` fields matching the spec. | Status: not_done
+- [x] **Test signal structure** — Verify each signal type has correct `id`, `severity`, `dimension`, and `message` fields matching the spec. | Status: done
 
-- [ ] **Test signal locations** — Verify signal locations (start/end character offsets) point to the correct positions in the output text. | Status: not_done
+- [x] **Test signal locations** — Verify signal locations (start/end character offsets) point to the correct positions in the output text. | Status: done
 
-- [ ] **Test signal ordering in report** — Verify signals are ordered by severity (critical first), then dimension order, then location (earlier first). | Status: not_done
+- [x] **Test signal ordering in report** — Verify signals are ordered by severity (critical first), then dimension order, then location (earlier first). | Status: done
 
 ---
 
 ## Phase 12: Edge Case Tests
 
-- [ ] **Test edge case: empty string input** — Empty string passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: not_done
+- [x] **Test edge case: empty string input** — Empty string passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: done
 
 - [ ] **Test edge case: null/undefined input** — `null` or `undefined` passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: not_done
 
-- [ ] **Test edge case: whitespace-only input** — Input containing only spaces, tabs, newlines. Treated as empty. Expect score 0.0. | Status: not_done
+- [x] **Test edge case: whitespace-only input** — Input containing only spaces, tabs, newlines. Treated as empty. Expect score 0.0. | Status: done
 
 - [ ] **Test edge case: very long input (100KB+)** — Verify grading completes without errors on large inputs. | Status: not_done
 
 - [ ] **Test edge case: input containing only numbers** — Numeric-only text. Should be valid text with potentially low coherence. | Status: not_done
 
-- [ ] **Test edge case: non-UTF-8/replacement characters** — Input with U+FFFD characters. Expect graceful handling, info signal for encoding anomalies. | Status: not_done
+- [x] **Test edge case: non-UTF-8/replacement characters** — Input with U+FFFD characters. Expect graceful handling, info signal for encoding anomalies. | Status: done
 
-- [ ] **Test edge case: mixed language text** — Input with non-Latin script. Tokenization degrades gracefully, no crashes, no NaN. | Status: not_done
+- [x] **Test edge case: mixed language text** — Input with non-Latin script. Tokenization degrades gracefully, no crashes, no NaN. | Status: done
 
-- [ ] **Test edge case: score normalization** — Verify all dimension scores are clamped to [0.0, 1.0]. No NaN, no negative values, no values >1.0. | Status: not_done
+- [x] **Test edge case: score normalization** — Verify all dimension scores are clamped to [0.0, 1.0]. No NaN, no negative values, no values >1.0. | Status: done
 
-- [ ] **Test edge case: report serialization** — Verify `JSON.stringify(report)` produces valid JSON with no circular references, no functions, no class instances. | Status: not_done
+- [x] **Test edge case: report serialization** — Verify `JSON.stringify(report)` produces valid JSON with no circular references, no functions, no class instances. | Status: done
 
 ---
 
@@ -458,7 +458,7 @@
 
 - [ ] **Benchmark: very large output (100,000 chars)** — Grade a 100,000-character output. Verify completion under 10ms. | Status: not_done
 
-- [ ] **Test ReDoS safety** — Run all pattern catalogs against adversarial inputs designed to trigger catastrophic backtracking. Verify no pattern takes more than 10ms. | Status: not_done
+- [x] **Test ReDoS safety** — Run all pattern catalogs against adversarial inputs designed to trigger catastrophic backtracking. Verify no pattern takes more than 10ms. | Status: done
 
 ---
 
@@ -504,7 +504,7 @@
 
 ## Phase 16: Final Integration & Publishing Prep
 
-- [ ] **Verify zero runtime dependencies** — Confirm `package.json` has no `dependencies` field (only `devDependencies`). All heuristics use built-in JavaScript/Node.js capabilities. | Status: not_done
+- [x] **Verify zero runtime dependencies** — Confirm `package.json` has no `dependencies` field (only `devDependencies`). All heuristics use built-in JavaScript/Node.js capabilities. | Status: done
 
 - [ ] **Verify TypeScript compilation** — Run `npm run build` and verify clean compilation with no errors or warnings. Check that `dist/` output includes `.js`, `.d.ts`, and `.d.ts.map` files. | Status: not_done
 
@@ -512,7 +512,7 @@
 
 - [ ] **Verify lint passes** — Run `npm run lint` with no errors or warnings. | Status: not_done
 
-- [ ] **Verify package.json metadata** — Ensure `name`, `version`, `description`, `main`, `types`, `files`, `bin`, `engines`, `license`, and `publishConfig` fields are all correct. | Status: not_done
+- [x] **Verify package.json metadata** — Ensure `name`, `version`, `description`, `main`, `types`, `files`, `bin`, `engines`, `license`, and `publishConfig` fields are all correct. | Status: done
 
 - [ ] **Bump version in package.json** — Bump version appropriately before publishing (initial release: 1.0.0 or 0.1.0 depending on stability assessment). | Status: not_done
 
