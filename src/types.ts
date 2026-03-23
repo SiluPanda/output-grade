@@ -145,18 +145,6 @@ export interface JsonSchema {
   pattern?: string;
 }
 
-/** Custom pattern overrides for detection catalogs. */
-export interface CustomPatterns {
-  /** Additional hedging phrases for hallucination risk detection. */
-  hedging?: RegExp[];
-
-  /** Additional refusal phrases for refusal detection. */
-  refusal?: RegExp[];
-
-  /** Additional preamble patterns to ignore during content extraction. */
-  preamble?: RegExp[];
-}
-
 /** Options for the grade() function. */
 export interface GradeOptions {
   /** The original prompt, for relevance scoring. */
@@ -179,12 +167,6 @@ export interface GradeOptions {
 
   /** Critical dimension floor overrides. */
   criticalFloors?: Record<string, { threshold: number; ceiling: number }>;
-
-  /** Custom patterns to add to detection catalogs. */
-  customPatterns?: CustomPatterns;
-
-  /** Custom stopwords for relevance scoring. */
-  stopwords?: string[];
 }
 
 // ── Grader Instance ──────────────────────────────────────────────────────────

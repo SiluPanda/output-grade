@@ -12,7 +12,6 @@ import type {
   DimensionScores,
   GradeMeta,
   JsonSchema,
-  CustomPatterns,
   OutputFormat,
   DetectedFormat,
 } from '../types';
@@ -105,8 +104,6 @@ describe('GradeOptions is all-optional', () => {
       weights: { 'schema-completeness': 0.3 },
       passThreshold: 0.8,
       criticalFloors: { 'refusal-detection': { threshold: 0.3, ceiling: 0.2 } },
-      customPatterns: { hedging: [/maybe/i] },
-      stopwords: ['the', 'a'],
     };
     void opts;
   });
@@ -157,13 +154,11 @@ describe('Grader interface can be mock-implemented', () => {
 });
 
 describe('GraderConfig extends same fields as GradeOptions (minus per-call fields)', () => {
-  it('GraderConfig accepts weight, passThreshold, criticalFloors, customPatterns, stopwords', () => {
+  it('GraderConfig accepts weight, passThreshold, criticalFloors', () => {
     const cfg: GraderConfig = {
       weights: { 'schema-completeness': 0.25 },
       passThreshold: 0.75,
       criticalFloors: { 'truncation-risk': { threshold: 0.2, ceiling: 0.3 } },
-      customPatterns: { refusal: [/not allowed/i] },
-      stopwords: ['foo'],
     };
     void cfg;
   });
@@ -236,15 +231,6 @@ describe('Supporting types', () => {
       },
     };
     void s;
-  });
-
-  it('CustomPatterns has optional hedging, refusal, preamble as RegExp arrays', () => {
-    const cp: CustomPatterns = {
-      hedging: [/I think/i],
-      refusal: [/I cannot/i],
-      preamble: [/Sure!/i],
-    };
-    void cp;
   });
 
   it('OutputFormat covers all 8 values', () => {

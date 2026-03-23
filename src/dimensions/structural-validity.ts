@@ -192,10 +192,11 @@ function scoreCode(output: string, signals: Signal[]): number {
 function scoreXml(output: string, signals: Signal[]): number {
   let score = 1.0;
 
-  // Simple tag balance check.
+  // Simple tag balance check (excluding self-closing tags like <br/> or <img ... />).
   const openTags = [...output.matchAll(/<(\w+)[\s>]/g)].map((m) => m[1]);
   const closeTags = [...output.matchAll(/<\/(\w+)>/g)].map((m) => m[1]);
-  const unclosed = openTags.length - closeTags.length;
+  const selfClosingCount = (output.match(/<\w+[^>]*\/>/g) || []).length;
+  const unclosed = openTags.length - closeTags.length - selfClosingCount;
 
   if (unclosed > 0) {
     signals.push({

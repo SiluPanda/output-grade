@@ -83,8 +83,8 @@ function scoreJsonCompliance(output: string, signals: Signal[]): number {
     /* not pure JSON */
   }
 
-  // JSON in code fence
-  const fenceMatch = trimmed.match(/```(?:json)?\s*\n([\s\S]*?)\n```/);
+  // JSON in code fence (newlines around content are optional)
+  const fenceMatch = trimmed.match(/```(?:json)?\s*\n?([\s\S]*?)\n?```/);
   if (fenceMatch) {
     try {
       JSON.parse(fenceMatch[1].trim());

@@ -41,8 +41,6 @@ export function createGrader(config: GraderConfig = {}): Grader {
         weights: options?.weights ?? frozenConfig.weights,
         passThreshold: options?.passThreshold ?? frozenConfig.passThreshold,
         criticalFloors: options?.criticalFloors ?? frozenConfig.criticalFloors,
-        customPatterns: options?.customPatterns ?? frozenConfig.customPatterns,
-        stopwords: options?.stopwords ?? frozenConfig.stopwords,
       };
       return grade(output, merged);
     },

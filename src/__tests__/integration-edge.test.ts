@@ -102,26 +102,20 @@ Overall, the results suggest positive trends.`;
 // ── Factory (createGrader) tests ────────────────────────────────────────────
 
 describe('createGrader() advanced usage', () => {
-  it('custom patterns are appended to built-in catalog', () => {
+  it('grader with custom weights applies them', () => {
     const grader = createGrader({
-      customPatterns: {
-        hedging: [/absolutely definitely/i],
-      },
+      weights: { 'hallucination-risk': 0.5 },
     });
-    // Grading text with custom pattern should still work with built-in patterns too
-    const report = grader.grade('It might be possible that absolutely definitely this works.');
-    // Both built-in hedging ("might be possible") and custom pattern should be detected
-    expect(report.dimensions['hallucination-risk']).toBeLessThan(1.0);
+    const report = grader.grade('It might be possible that this works.');
+    // Weight is redistributed proportionally after excluded dimensions (no prompt/schema),
+    // but hallucination-risk should be the largest weight
+    const hrWeight = report.meta.weights['hallucination-risk'] ?? 0;
+    expect(hrWeight).toBeGreaterThan(0.3);
   });
 
-  it('per-dimension methods use custom config', () => {
-    const grader = createGrader({
-      customPatterns: {
-        hedging: [/test-custom-pattern/i],
-      },
-    });
-    // Per-dimension methods should work
-    const result = grader.detectHallucinations('This text contains test-custom-pattern marker.');
+  it('per-dimension methods work correctly', () => {
+    const grader = createGrader();
+    const result = grader.detectHallucinations('This text is straightforward and factual.');
     expect(result).toBeDefined();
     expect(result.score).toBeLessThanOrEqual(1.0);
     expect(result.score).toBeGreaterThanOrEqual(0.0);

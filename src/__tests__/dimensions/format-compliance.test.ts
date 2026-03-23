@@ -307,4 +307,16 @@ describe('scoreFormatCompliance — score clamping', () => {
       expect(Number.isFinite(result.score)).toBe(true);
     }
   });
+
+  it('detects JSON in code fence without newlines around content', () => {
+    const input = '```json{"key":"value"}```';
+    const result = scoreFormatCompliance(input, 'json');
+    expect(result.score).toBeGreaterThanOrEqual(0.9);
+  });
+
+  it('detects JSON in code fence with newlines (standard format)', () => {
+    const input = '```json\n{"key":"value"}\n```';
+    const result = scoreFormatCompliance(input, 'json');
+    expect(result.score).toBeGreaterThanOrEqual(0.9);
+  });
 });
