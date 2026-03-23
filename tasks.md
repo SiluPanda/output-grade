@@ -210,21 +210,21 @@
 
 ## Phase 8: CLI
 
-- [ ] **Implement CLI argument parser** — In `src/cli.ts`, implement a lightweight argument parser (no dependencies) that handles all flags: `--format <format>`, `--schema <file>`, `--prompt <text>`, `--prompt-file <file>`, `--threshold <number>`, `--json`, `--score-only`, `--dimensions`, `--signals`, `--verbose`. Parse the positional argument as an optional file path. | Status: not_done
+- [ ] **Implement CLI argument parser** — In `src/cli.ts`, implement a lightweight argument parser (no dependencies) that handles all flags: `--format <format>`, `--schema <file>`, `--prompt <text>`, `--prompt-file <file>`, `--threshold <number>`, `--json`, `--score-only`, `--dimensions`, `--signals`, `--verbose`. Parse the positional argument as an optional file path. | Status: done
 
-- [ ] **Implement CLI input reading** — Read LLM output from the file argument (if provided) or from stdin (if no file). Handle errors: unreadable file, empty stdin, etc. Exit with code 2 for usage errors. | Status: not_done
+- [ ] **Implement CLI input reading** — Read LLM output from the file argument (if provided) or from stdin (if no file). Handle errors: unreadable file, empty stdin, etc. Exit with code 2 for usage errors. | Status: done
 
-- [ ] **Implement CLI schema file loading** — When `--schema <file>` is provided, read and parse the JSON Schema file. Exit with code 2 if file is unreadable or not valid JSON. | Status: not_done
+- [ ] **Implement CLI schema file loading** — When `--schema <file>` is provided, read and parse the JSON Schema file. Exit with code 2 if file is unreadable or not valid JSON. | Status: done
 
-- [ ] **Implement CLI prompt file loading** — When `--prompt-file <file>` is provided, read the file contents as the prompt string. Exit with code 2 if file is unreadable. | Status: not_done
+- [ ] **Implement CLI prompt file loading** — When `--prompt-file <file>` is provided, read the file contents as the prompt string. Exit with code 2 if file is unreadable. | Status: done
 
-- [ ] **Implement CLI human-readable output** — Default output mode. Display: "Grade: X.XX (PASS/FAIL)", per-dimension scores with checkmark/warning indicators (when `--dimensions` or `--verbose`), signals list (when `--signals` or `--verbose`), summary text. Match the format shown in spec section 12. | Status: not_done
+- [ ] **Implement CLI human-readable output** — Default output mode. Display: "Grade: X.XX (PASS/FAIL)", per-dimension scores with checkmark/warning indicators (when `--dimensions` or `--verbose`), signals list (when `--signals` or `--verbose`), summary text. Match the format shown in spec section 12. | Status: done
 
-- [ ] **Implement CLI JSON output** — When `--json` is provided, output the full GradeReport as formatted JSON to stdout. | Status: not_done
+- [ ] **Implement CLI JSON output** — When `--json` is provided, output the full GradeReport as formatted JSON to stdout. | Status: done
 
-- [ ] **Implement CLI score-only output** — When `--score-only` is provided, output only the composite score as a single number to stdout. | Status: not_done
+- [ ] **Implement CLI score-only output** — When `--score-only` is provided, output only the composite score as a single number to stdout. | Status: done
 
-- [ ] **Implement CLI exit codes** — Exit 0 when output passes threshold (grade >= threshold), exit 1 when output fails threshold (grade < threshold), exit 2 for usage errors (invalid options, missing input, unreadable file). | Status: not_done
+- [ ] **Implement CLI exit codes** — Exit 0 when output passes threshold (grade >= threshold), exit 1 when output fails threshold (grade < threshold), exit 2 for usage errors (invalid options, missing input, unreadable file). | Status: done
 
 - [x] **Configure CLI bin entry point** — Add `"bin": { "output-grade": "dist/cli.js" }` to `package.json`. Ensure `cli.ts` has proper shebang (`#!/usr/bin/env node`) and is executable after build. | Status: done
 
@@ -250,7 +250,7 @@
 
 - [x] **Test schema completeness: optional fields handling** — Optional fields missing, present with correct type, and present with wrong type. Verify half-weight contribution and correct sub-scores (0.8 for missing, 0.5 for wrong type, 1.0 for correct). | Status: done
 
-- [ ] **Test schema completeness: array minItems validation** — Array field with `minItems: 1` but empty array. Expect warning signal. | Status: not_done
+- [x] **Test schema completeness: array minItems validation** — Array field with `minItems: 1` but empty array. Expect warning signal. | Status: done
 
 ### Structural Validity Tests
 
@@ -306,9 +306,9 @@
 
 - [x] **Test hallucination: fabricated URL** — Text containing a clearly fabricated URL with many path segments. Expect score drops, critical/warning signal `fabricated-url`. | Status: done
 
-- [ ] **Test hallucination: impossible date** — Text with February 30 or similar impossible date. Expect score drops, critical signal. | Status: not_done
+- [x] **Test hallucination: impossible date** — Text with February 30 or similar impossible date. Expect score drops, critical signal. | Status: done
 
-- [ ] **Test hallucination: future-dated citation** — Citation with year beyond current year. Expect warning signal `implausible-citation`. | Status: not_done
+- [x] **Test hallucination: future-dated citation** — Citation with year beyond current year. Expect warning signal `implausible-citation`. | Status: done
 
 - [x] **Test hallucination: self-contradiction** — Text that contradicts itself explicitly. Expect warning signal, score drops. | Status: done
 
@@ -330,7 +330,7 @@
 
 - [x] **Test truncation: incomplete numbered list** — Numbered list that stops mid-item or has fewer items than promised. Expect warning signal. | Status: done
 
-- [ ] **Test truncation: abrupt ending with ellipsis** — Text ending with "..." after partial sentence. Expect signal for abrupt ending. | Status: not_done
+- [x] **Test truncation: abrupt ending with ellipsis** — Text ending with "..." after partial sentence. Expect signal for abrupt ending. | Status: done
 
 - [x] **Test truncation: hyphenated word break at end** — Text ending with "impor-". Expect signal for truncated word. | Status: done
 
@@ -400,21 +400,21 @@
 
 - [x] **Test grade(): full integration with JSON output** — Grade a well-formed JSON output with schema, prompt, and format. Verify all dimensions score, composite is computed, report is complete. Match Example 1 from spec section 18. | Status: done
 
-- [ ] **Test grade(): full integration with truncated output** — Grade a truncated JSON output. Match Example 2 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with truncated output** — Grade a truncated JSON output. Match Example 2 from spec section 18. | Status: done
 
 - [x] **Test grade(): full integration with refusal output** — Grade a full refusal. Match Example 3 from spec section 18. | Status: done
 
-- [ ] **Test grade(): full integration with repetition loop** — Grade a repetition loop output. Match Example 4 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with repetition loop** — Grade a repetition loop output. Match Example 4 from spec section 18. | Status: done
 
-- [ ] **Test grade(): full integration with hedging/hallucination** — Grade hedging-heavy output with fabricated citation. Match Example 5 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with hedging/hallucination** — Grade hedging-heavy output with fabricated citation. Match Example 5 from spec section 18. | Status: done
 
-- [ ] **Test grade(): full integration with markdown output** — Grade markdown with minor issues. Match Example 6 from spec section 18. | Status: not_done
+- [x] **Test grade(): full integration with markdown output** — Grade markdown with minor issues. Match Example 6 from spec section 18. | Status: done
 
 - [x] **Test createGrader(): factory with custom config** — Create grader with custom weights, threshold, and custom patterns. Verify grade() uses merged config. | Status: done
 
-- [ ] **Test createGrader(): custom patterns are appended** — Verify custom patterns are appended to built-in catalog, not replacements. | Status: not_done
+- [x] **Test createGrader(): custom patterns are appended** — Verify custom patterns are appended to built-in catalog, not replacements. | Status: done
 
-- [ ] **Test createGrader(): per-dimension methods use custom config** — Call `grader.detectHallucinations()` with custom hedging patterns and verify they are used. | Status: not_done
+- [x] **Test createGrader(): per-dimension methods use custom config** — Call `grader.detectHallucinations()` with custom hedging patterns and verify they are used. | Status: done
 
 ---
 
@@ -432,13 +432,13 @@
 
 - [x] **Test edge case: empty string input** — Empty string passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: done
 
-- [ ] **Test edge case: null/undefined input** — `null` or `undefined` passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: not_done
+- [x] **Test edge case: null/undefined input** — `null` or `undefined` passed to `grade()`. Expect score 0.0, `empty-output` critical signal. | Status: done
 
 - [x] **Test edge case: whitespace-only input** — Input containing only spaces, tabs, newlines. Treated as empty. Expect score 0.0. | Status: done
 
-- [ ] **Test edge case: very long input (100KB+)** — Verify grading completes without errors on large inputs. | Status: not_done
+- [x] **Test edge case: very long input (100KB+)** — Verify grading completes without errors on large inputs. | Status: done
 
-- [ ] **Test edge case: input containing only numbers** — Numeric-only text. Should be valid text with potentially low coherence. | Status: not_done
+- [x] **Test edge case: input containing only numbers** — Numeric-only text. Should be valid text with potentially low coherence. | Status: done
 
 - [x] **Test edge case: non-UTF-8/replacement characters** — Input with U+FFFD characters. Expect graceful handling, info signal for encoding anomalies. | Status: done
 
@@ -452,11 +452,11 @@
 
 ## Phase 13: Performance Tests
 
-- [ ] **Benchmark: typical output (500 chars)** — Grade a 500-character LLM output. Verify completion under 0.5ms. | Status: not_done
+- [ ] **Benchmark: typical output (500 chars)** — Grade a 500-character LLM output. Verify completion under 0.5ms. | Status: done
 
-- [ ] **Benchmark: large output (10,000 chars)** — Grade a 10,000-character output. Verify completion under 2ms. | Status: not_done
+- [ ] **Benchmark: large output (10,000 chars)** — Grade a 10,000-character output. Verify completion under 2ms. | Status: done
 
-- [ ] **Benchmark: very large output (100,000 chars)** — Grade a 100,000-character output. Verify completion under 10ms. | Status: not_done
+- [ ] **Benchmark: very large output (100,000 chars)** — Grade a 100,000-character output. Verify completion under 10ms. | Status: done
 
 - [x] **Test ReDoS safety** — Run all pattern catalogs against adversarial inputs designed to trigger catastrophic backtracking. Verify no pattern takes more than 10ms. | Status: done
 
@@ -464,41 +464,41 @@
 
 ## Phase 14: CLI Tests
 
-- [ ] **Test CLI: read from stdin** — Pipe output to CLI via stdin, verify correct grade report on stdout. | Status: not_done
+- [ ] **Test CLI: read from stdin** — Pipe output to CLI via stdin, verify correct grade report on stdout. | Status: done
 
-- [ ] **Test CLI: read from file** — Pass a file path argument, verify CLI reads and grades it correctly. | Status: not_done
+- [ ] **Test CLI: read from file** — Pass a file path argument, verify CLI reads and grades it correctly. | Status: done
 
-- [ ] **Test CLI: --json flag** — Verify JSON output mode produces valid, parseable JSON matching GradeReport structure. | Status: not_done
+- [ ] **Test CLI: --json flag** — Verify JSON output mode produces valid, parseable JSON matching GradeReport structure. | Status: done
 
-- [ ] **Test CLI: --score-only flag** — Verify only a single number is printed to stdout. | Status: not_done
+- [ ] **Test CLI: --score-only flag** — Verify only a single number is printed to stdout. | Status: done
 
-- [ ] **Test CLI: --format flag** — Verify format option is passed through to `grade()`. | Status: not_done
+- [ ] **Test CLI: --format flag** — Verify format option is passed through to `grade()`. | Status: done
 
-- [ ] **Test CLI: --schema flag** — Verify schema file is loaded and used for grading. | Status: not_done
+- [ ] **Test CLI: --schema flag** — Verify schema file is loaded and used for grading. | Status: done
 
-- [ ] **Test CLI: --prompt and --prompt-file flags** — Verify prompt is passed through correctly from both text and file sources. | Status: not_done
+- [ ] **Test CLI: --prompt and --prompt-file flags** — Verify prompt is passed through correctly from both text and file sources. | Status: done
 
-- [ ] **Test CLI: --threshold flag** — Verify custom threshold affects pass/fail determination and exit code. | Status: not_done
+- [ ] **Test CLI: --threshold flag** — Verify custom threshold affects pass/fail determination and exit code. | Status: done
 
-- [ ] **Test CLI: --dimensions flag** — Verify per-dimension scores are shown in human-readable output. | Status: not_done
+- [ ] **Test CLI: --dimensions flag** — Verify per-dimension scores are shown in human-readable output. | Status: done
 
-- [ ] **Test CLI: --signals flag** — Verify signals are shown in human-readable output. | Status: not_done
+- [ ] **Test CLI: --signals flag** — Verify signals are shown in human-readable output. | Status: done
 
-- [ ] **Test CLI: --verbose flag** — Verify all details (dimensions + signals + metadata) are shown. | Status: not_done
+- [ ] **Test CLI: --verbose flag** — Verify all details (dimensions + signals + metadata) are shown. | Status: done
 
-- [ ] **Test CLI: exit code 0 for pass** — Output above threshold. Verify exit code 0. | Status: not_done
+- [ ] **Test CLI: exit code 0 for pass** — Output above threshold. Verify exit code 0. | Status: done
 
-- [ ] **Test CLI: exit code 1 for fail** — Output below threshold. Verify exit code 1. | Status: not_done
+- [ ] **Test CLI: exit code 1 for fail** — Output below threshold. Verify exit code 1. | Status: done
 
-- [ ] **Test CLI: exit code 2 for usage error** — Invalid options, missing input, unreadable file. Verify exit code 2. | Status: not_done
+- [ ] **Test CLI: exit code 2 for usage error** — Invalid options, missing input, unreadable file. Verify exit code 2. | Status: done
 
 ---
 
 ## Phase 15: Documentation
 
-- [ ] **Write README** — Create `README.md` with: package description, installation instructions (`npm install output-grade`), quick start examples (basic usage, context-aware grading, per-dimension functions, createGrader factory), CLI usage with all flags, API reference for all exports, dimension descriptions with scoring ranges, configuration guide (weights, thresholds, custom patterns), integration examples (llm-retry, monitoring, CI/CD, llm-output-normalizer). | Status: not_done
+- [ ] **Write README** — Create `README.md` with: package description, installation instructions (`npm install output-grade`), quick start examples (basic usage, context-aware grading, per-dimension functions, createGrader factory), CLI usage with all flags, API reference for all exports, dimension descriptions with scoring ranges, configuration guide (weights, thresholds, custom patterns), integration examples (llm-retry, monitoring, CI/CD, llm-output-normalizer). | Status: done
 
-- [ ] **Add JSDoc comments to all public exports** — Add comprehensive JSDoc comments to `grade()`, `createGrader()`, all per-dimension functions, and all exported interfaces/types. Include parameter descriptions, return type descriptions, and usage examples in JSDoc. | Status: not_done
+- [ ] **Add JSDoc comments to all public exports** — Add comprehensive JSDoc comments to `grade()`, `createGrader()`, all per-dimension functions, and all exported interfaces/types. Include parameter descriptions, return type descriptions, and usage examples in JSDoc. | Status: done
 
 ---
 
@@ -506,14 +506,14 @@
 
 - [x] **Verify zero runtime dependencies** — Confirm `package.json` has no `dependencies` field (only `devDependencies`). All heuristics use built-in JavaScript/Node.js capabilities. | Status: done
 
-- [ ] **Verify TypeScript compilation** — Run `npm run build` and verify clean compilation with no errors or warnings. Check that `dist/` output includes `.js`, `.d.ts`, and `.d.ts.map` files. | Status: not_done
+- [x] **Verify TypeScript compilation** — Run `npm run build` and verify clean compilation with no errors or warnings. Check that `dist/` output includes `.js`, `.d.ts`, and `.d.ts.map` files. | Status: done
 
-- [ ] **Verify all tests pass** — Run `npm run test` and verify 100% pass rate across all test suites. | Status: not_done
+- [x] **Verify all tests pass** — Run `npm run test` and verify 100% pass rate across all test suites. | Status: done
 
-- [ ] **Verify lint passes** — Run `npm run lint` with no errors or warnings. | Status: not_done
+- [x] **Verify lint passes** — Run `npm run lint` with no errors or warnings. | Status: done
 
 - [x] **Verify package.json metadata** — Ensure `name`, `version`, `description`, `main`, `types`, `files`, `bin`, `engines`, `license`, and `publishConfig` fields are all correct. | Status: done
 
-- [ ] **Bump version in package.json** — Bump version appropriately before publishing (initial release: 1.0.0 or 0.1.0 depending on stability assessment). | Status: not_done
+- [x] **Bump version in package.json** — Bump version appropriately before publishing (initial release: 1.0.0 or 0.1.0 depending on stability assessment). | Status: done
 
-- [ ] **End-to-end smoke test** — Run the CLI against real LLM output samples (JSON, markdown, code, prose, refusal, truncated, repetitive). Verify scores are reasonable and match spec examples. | Status: not_done
+- [ ] **End-to-end smoke test** — Run the CLI against real LLM output samples (JSON, markdown, code, prose, refusal, truncated, repetitive). Verify scores are reasonable and match spec examples. | Status: done
