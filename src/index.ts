@@ -12,7 +12,6 @@ export type {
   GradeMeta,
   GradeReport,
   JsonSchema,
-  CustomPatterns,
   GradeOptions,
   GraderConfig,
   Grader,

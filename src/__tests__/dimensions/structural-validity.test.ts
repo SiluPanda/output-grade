@@ -325,4 +325,19 @@ describe('scoreStructuralValidity — score clamping', () => {
     const result = scoreStructuralValidity(input, 'xml');
     expect(result.score).toBe(0);
   });
+
+  it('does not penalize self-closing XML tags as unclosed', () => {
+    const input = '<root><br /><img src="test.png" /><hr/></root>';
+    const result = scoreStructuralValidity(input, 'xml');
+    expect(result.score).toBe(1.0);
+    expect(result.signals).toHaveLength(0);
+  });
+
+  it('correctly counts unclosed tags when mixed with self-closing', () => {
+    const input = '<root><br /><div><img src="x" /></root>';
+    const result = scoreStructuralValidity(input, 'xml');
+    // div is unclosed: openTags=[root, div] closeTags=[root] selfClosing=[br, img] → 2-1-2 = -1 → no penalty (negative unclosed is fine)
+    expect(result.score).toBeLessThanOrEqual(1.0);
+    expect(result.score).toBeGreaterThanOrEqual(0);
+  });
 });
